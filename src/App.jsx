@@ -1,35 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Header from './components/Header.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React!</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <Header />
+            
+            <main className="main-section">
+                <div>
+                    <img src="./images/what-is-hot-pot_universal.webp" alt="delicious" />
+                </div>
+                <div>
+                    <h1>Let's Get Cooking!</h1>
+                    <h2>
+                        <p>
+                            At PureWow, we're passionate about the art of cooking and the joy of
+                            sharing delicious meals.
+                        </p>
+                        <p>
+                            Whether you're a seasoned chef or just starting your culinary journey,
+                            you're in for a treat!
+                        </p>
+                        <p>
+                            Explore our collection of mouthwatering recipes, culinary tips, and
+                            food adventures that will inspire your inner foodie.
+                        </p>
+                        <p>
+                            Ready to transform your kitchen into a heaven of flavors? Start
+                            exploring our recipes and cooking guides today.
+                        </p>
+                        <p>
+                            Unleash your creativity, savor the aromas, and enjoy the magic of
+                            cooking.
+                        </p>
+                    </h2>
+                </div>
+            </main>
+            <footer>
+                <p>Defence project</p>
+            </footer>
+        </>
+    )
 }
 
 export default App
