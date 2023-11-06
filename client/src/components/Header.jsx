@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import * as userService from "../services/userAPI.js"
-import Login from "./login/Login.jsx";
-import Register from "./register/Register.jsx";
+
 
 export default function Header() {
     const [users, setUsers] = useState([]);
@@ -17,7 +16,7 @@ export default function Header() {
 
     return (
         <header className="header-section">
-            <div className="container">
+            <div className="header-container">
                 <nav className="nav-section">
                     <div className="logo">
                         <img src="./images/purewow-logo-black.webp" alt="logo" />
@@ -42,8 +41,7 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <Login />
-                <Register />
+
 
             </div>
         </header>

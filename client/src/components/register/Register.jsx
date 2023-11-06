@@ -19,7 +19,7 @@ export default function Register() {
                     <button className="login-reg-button" type="submit">Register</button>
                 </form>
                 <p>
-                    Have an account? <a href="/users/login">LogIn</a>
+                    Have an account? <a href="/users/login">Login</a>
                 </p>
             </div>
         </div>
