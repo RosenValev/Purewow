@@ -3,7 +3,6 @@ const expressConfig = require('./config/expressConfig.js');
 const dbConnect = require('./config/dbConfig.js');
 const routesConfig = require('./config/routesConfig.js')
 
-
 const app = express();
 const PORT = 3000;
 
@@ -17,13 +16,3 @@ dbConnect()
     .catch(error => console.log('DB error : ', error));
 
 routesConfig(app);
-
-
-// app.get('/', (req, res) => {
-//     res.send("hello sssss")
-// })
-
-// app.get('/recipies', (req, res) => {
-//     res.send("wait for them")
-// })
-

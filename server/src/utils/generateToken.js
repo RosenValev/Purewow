@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const SECRET = "alabalaportukala";
+const { SECRET } = require('./secret.js')
 
 function generateToken(user) {
     const payload = {
