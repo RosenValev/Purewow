@@ -22,7 +22,7 @@ const getOne = async (req, res) => {
         const user = await User.findById(id)
 
         if (!user) {
-            throw new Error(404, 'Users not found!');
+            return res.status(404).json({ message: `User not found! with ID ${id}` });
         }
         res.status(200).json(user);
     } catch (err) {
@@ -63,7 +63,7 @@ const register = async (req, res) => {
 const updateOne = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findByIdAndUpdate(id, req.body, { new: true })
+        const user = await User.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
         if (!user) {
             return res.status(404).json({ message: `User not found! with ID ${id}` });
         }
@@ -74,6 +74,23 @@ const updateOne = async (req, res) => {
     }
 };
 
+//DELETE
+
+const deleteOne = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findByIdAndDelete(id);
+        if (!user) {
+            return res.status(404).json({ message: `User not found! with ID ${id}` });
+        }
+        res.status(200).json(user)
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ message: err.message });
+    }
+}
+
+
 
 
 
@@ -82,4 +99,5 @@ module.exports = {
     getAll,
     getOne,
     updateOne,
+    deleteOne,
 }
