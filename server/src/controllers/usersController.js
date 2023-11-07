@@ -43,7 +43,7 @@ const createOne = async (req, res) => {
         }
 
         const userCreated = await User.create(userData);
-        const token = generateToken(userCreated);
+        // const token = generateToken(userCreated);
         const data = {
             id: userCreated._id,
             username: userCreated.username,
@@ -51,7 +51,7 @@ const createOne = async (req, res) => {
             avatar: userCreated.avatar,
             createdAt: userCreated.createdAt,
             updatedAt: userCreated.updatedAt,
-            token,
+            // token,
         }
         res.status(200).json(data);
     } catch (err) {
@@ -64,7 +64,25 @@ const createOne = async (req, res) => {
 const updateOne = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
+        const { username, email } = req.body;
+
+        if (!username || !email) {
+            return res.status(404).json({ message: `Username and email are required` });
+        }
+
+        const usernameAlreadyUsed = await User.findOne({ username });
+        if (usernameAlreadyUsed) {
+            return res.status(404).json({ message: `Username ${username} already in use` });
+
+        };
+
+        const emailAlreadyUsed = await User.findOne({ email });
+        if (emailAlreadyUsed) {
+            return res.status(404).json({ message: `Email ${email} already in use` });
+
+        }
+
+        const user = await User.findByIdAndUpdate(id, { username, email }, { new: true })
         if (!user) {
             return res.status(404).json({ message: `User not found! with ID ${id}` });
         }
@@ -96,7 +114,7 @@ const login = async (req, res) => {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(404).json({ message: `User ${username} not found}` });
+            return res.status(404).json({ message: `User ${username} not found` });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
