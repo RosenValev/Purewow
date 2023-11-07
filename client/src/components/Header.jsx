@@ -1,17 +1,46 @@
 import { useEffect, useState } from "react";
-import * as userService from "../services/userAPI.js"
+import * as userService from "../services/userApi.js"
+import Register from "../components/Register/Register.jsx"
+import Login from "../components/Login/Login.jsx"
+
 
 
 export default function Header() {
     const [users, setUsers] = useState([]);
-    console.log(users)
+    const [showRegisterModal, setshowRegisterModal] = useState(false);
+    const [showLoginModal, setshowLoginModal] = useState(false);
 
+    console.log(users)
     useEffect(() => {
         userService.getAll()
             .then(result => setUsers(result))
             .catch(err => console.log(err));
     }, []);
 
+    const createUserClickHandler = () => {
+        setshowRegisterModal(true);
+    }
+
+    const loginUserClickHandler = () => {
+        setshowLoginModal(true);
+    };
+
+    const onUserCreateHandler = async (e) => {
+        e.preventDefault();
+        console.log('clicked')
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+        const newUser = await userService.create(data)
+    }
+
+    const onUserLoginHandler = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+        const loggedUser = await userService.login(data)
+        console.log(loggedUser)
+
+    }
 
 
     return (
@@ -35,13 +64,24 @@ export default function Header() {
                             <li className="menu-item">
                                 <a href="#">My recipes</a>
                             </li>
-                            <button className="button">Login</button>
-                            <button className="button">Register</button>
-                            <button className="button">Logout</button>
+                            <button className="button" onClick={loginUserClickHandler}>Login</button>
+                            <button className="button" onClick={createUserClickHandler} >Register</button>
+                            <button className="button" >Logout</button>
                         </ul>
                     </div>
                 </nav>
 
+                {showRegisterModal && (
+                    <Register
+                        onUserCreate={onUserCreateHandler}
+                    />
+                )}
+
+                {showLoginModal && (
+                    <Login
+                        onUserLogin={onUserLoginHandler}
+                    />
+                )}
 
             </div>
         </header>

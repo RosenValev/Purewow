@@ -1,9 +1,12 @@
-export default function Login() {
+export default function Login({
+    onUserLogin
+}
+) {
     return (
         <div className="login-register-div">
             <div className="login-register-box">
                 <h2>Welcome</h2>
-                <form >
+                <form onSubmit={onUserLogin}>
                     <div>
                         <label htmlFor="username">Username:</label>
                         <input type="text" name="username" id="username" placeholder="Enter your username" />

@@ -2,12 +2,13 @@ const User = require('../models/User.js');
 const generateToken = require('../utils/generateToken.js');
 const bcrypt = require('bcrypt');
 
+
 //GET ALL
 const getAll = async (req, res) => {
     try {
         const users = await User.find()
         if (!users?.length) {
-            throw new Error(404, 'Users not found!');
+            return res.status(404).json({ message: `Users not found!` });
         }
         res.status(200).json(users);
     } catch (err) {
@@ -35,14 +36,24 @@ const getOne = async (req, res) => {
 //CREATE
 const createOne = async (req, res) => {
     try {
-        const userData = req.body;
-        const user = await User.findOne({ username: userData.username });
+        const { username, email, password, repeatPassword } = req.body;
+        const user = await User.findOne({ username });
 
-        if (user) {
-            throw new Error('Username already exists');
+        if (username == "" || email == "" || password == "" || repeatPassword == "") {
+            return res.status(404).json({ message: `All fields are required` });
         }
 
-        const userCreated = await User.create(userData);
+        if (user) {
+            return res.status(404).json({ message: `Username ${username} already in use` });
+        };
+
+        const emailAlreadyUsed = await User.findOne({ email });
+        if (emailAlreadyUsed) {
+            return res.status(404).json({ message: `Email ${email} already in use` });
+
+        }
+
+        const userCreated = await User.create({ username, email, password, repeatPassword });
         // const token = generateToken(userCreated);
         const data = {
             id: userCreated._id,
@@ -73,20 +84,19 @@ const updateOne = async (req, res) => {
         const usernameAlreadyUsed = await User.findOne({ username });
         if (usernameAlreadyUsed) {
             return res.status(404).json({ message: `Username ${username} already in use` });
-
         };
 
         const emailAlreadyUsed = await User.findOne({ email });
-        if (emailAlreadyUsed) {
+        if (emailAlreadyUsed && emailAlreadyUsed.id !== id) {
             return res.status(404).json({ message: `Email ${email} already in use` });
 
         }
 
-        const user = await User.findByIdAndUpdate(id, { username, email }, { new: true })
-        if (!user) {
+        const updatedUser = await User.findByIdAndUpdate(id, { username, email }, { new: true })
+        if (!updatedUser) {
             return res.status(404).json({ message: `User not found! with ID ${id}` });
         }
-        res.status(200).json(user);
+        res.status(200).json(updatedUser);
     } catch (err) {
         console.log(err.message);
         res.status(500).json({ message: err.message });
@@ -123,7 +133,7 @@ const login = async (req, res) => {
         }
 
         const token = generateToken(user);
-        res.cookie('auth', token);
+        res.cookie('Auth', token, { httpOnly: true, Path: "/", sameSite: "strict", secure: true });
         const data = {
             id: user._id,
             username: user.username,
@@ -145,10 +155,6 @@ const logout = (req, res) => {
     res.clearCookie('auth');
     res.status(200).json({ success: 'Logged out successfully!' });
 };
-
-
-
-
 
 module.exports = {
     createOne,
