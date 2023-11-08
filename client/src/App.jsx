@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import './App.css'
+import { Routes, Route } from "react-router-dom"
+
 import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
 import Home from './components/Home.jsx'
 import RecipieDetails from './components/RecipieDetails/RecipieDetails.jsx'
 
 function App() {
-    const [count, setCount] = useState(0)
 
     return (
         <>

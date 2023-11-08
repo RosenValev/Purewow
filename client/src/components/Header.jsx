@@ -6,16 +6,9 @@ import Login from "../components/Login/Login.jsx"
 
 
 export default function Header() {
-    const [users, setUsers] = useState([]);
+    const [user, setUser] = useState([]);
     const [showRegisterModal, setshowRegisterModal] = useState(false);
     const [showLoginModal, setshowLoginModal] = useState(false);
-
-    console.log(users)
-    useEffect(() => {
-        userService.getAll()
-            .then(result => setUsers(result))
-            .catch(err => console.log(err));
-    }, []);
 
     const createUserClickHandler = () => {
         setshowRegisterModal(true);
@@ -30,7 +23,7 @@ export default function Header() {
         console.log('clicked')
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
-        const newUser = await userService.create(data)
+        await userService.create(data)
     }
 
     const onUserLoginHandler = async (e) => {
@@ -38,6 +31,7 @@ export default function Header() {
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
         const loggedUser = await userService.login(data)
+        setUser(loggedUser)
         console.log(loggedUser)
 
     }
