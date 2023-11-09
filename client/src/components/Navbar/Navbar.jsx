@@ -12,6 +12,7 @@ export default function Navigation() {
                 <Navbar.Brand href="#home">PureWow</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/Home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/Single recipie">Single recipie</Nav.Link>
                     <Nav.Link as={Link} to="/Recipies">Recipies</Nav.Link>
                     {/* for Guests */}
                     <Nav.Link as={Link} to="/Login">Login</Nav.Link>
