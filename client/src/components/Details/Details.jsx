@@ -30,38 +30,19 @@ export default function Details() {
                 </div>
                 <div className={styles["recipe-ingredients"]}>
                     <h2>Ingredients:</h2>
-                    <ul>
-                        <li>1 whole chicken (4 pounds, innards removed)</li>
-                        <li>1 large yellow onion (peeled and chopped)</li>
-                        <li>2 medium carrots (chopped)</li>
-                        <li>2 celery stalks (chopped)</li>
-                        <li>1 large head garlic (cut crosswise)</li>
-                        <li>½ to 1 jalapeño (cut lengthwise, plus more for garnish)</li>
-                        <li>Two 3-inch pieces ginger (peeled and chopped)</li>
-                        <li>1 large bunch fresh parsley (plus more for garnish)</li>
-                        <li>1 tablespoon coriander seeds</li>
-                        <li>1 tablespoon kosher salt</li>
-                        <li>2 teaspoons freshly ground black pepper</li>
-                        <li>6 ounces fresh spinach or other tender greens</li>
-                        <li>2 lemons (thinly sliced)</li>
-                    </ul>
+
+                    <p>One 4-pound whole chicken, innards removed. Large yellow onion, peeled and chopped into large pieces. Medium carrots, chopped into large pieces. Celery stalks, chopped into large pieces. Large head garlic, cut crosswise. One jalapeno cut lengthwise, plus more for garnish. Two 3-inch pieces ginger, peeled and chopped. Large bunch fresh parsley, plus more for garnish. Tablespoon coriander seeds. Tablespoon kosher salt. Two teaspoons freshly ground black pepper.Six ounces fresh spinach or other tender greens. Two lemons, thinly sliced</p>
                 </div>
                 <div className={styles["recipe-directions"]}>
                     <h2>Directions:</h2>
-                    <ol>
-                        <li>
-                            Combine all ingredients (except spinach, shredded chicken, jalapeño,
-                            and lemon slices) in a large Dutch oven or saucepan. Add water to
-                            cover. Boil, then simmer covered until chicken is tender (55-60
-                            minutes).
-                        </li>
-                        <li>
-                            Transfer chicken, shred, and strain the stock into a saucepan. Keep
-                            warm over low heat. Add salt if needed. Divide spinach, shredded
-                            chicken, jalapeño, and lemon slices among serving bowls. Top with hot
-                            broth.
-                        </li>
-                    </ol>
+                    <p> Combine all ingredients (except spinach, shredded chicken, jalapeño,
+                        and lemon slices) in a large Dutch oven or saucepan. Add water to
+                        cover. Boil, then simmer covered until chicken is tender (55-60
+                        minutes).  Transfer chicken, shred, and strain the stock into a saucepan. Keep
+                        warm over low heat. Add salt if needed. Divide spinach, shredded
+                        chicken, jalapeño, and lemon slices among serving bowls. Top with hot
+                        broth.
+                    </p>
                 </div>
                 <div className={styles["buttons-div"]}>
                     <button className={styles["edit-delete-button"]} type="submit">Edit</button>
