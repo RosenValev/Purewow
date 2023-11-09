@@ -1,18 +1,20 @@
-export default function RecipieDetails() {
+import styles from './RecipieList.module.css'
+
+export default function RecipieList() {
     return (
-        <div className="recipie-container">
-            <div className="recipe-details">
-                <div className="recipe-title">Spicy Lemon-Ginger Chicken Soup</div>
+        <div className={styles['recipie-container']}>
+            <div className={styles["recipe-details"]}>
+                <div className={styles["recipe-title"]}>Spicy Lemon-Ginger Chicken Soup</div>
                 <img
-                    className="recipe-image"
+                    className={styles["recipe-image"]}
                     src="https://publish.purewow.net/wp-content/uploads/sites/2/2019/09/spicy-lemon-ginger-chicken-soup-recipe.jpg?resize=728%2C921"
                     alt="Spicy Lemon-Ginger Chicken Soup"
                 />
-                <div className="recipe-description">
+                <div className={styles["recipe-description"]}>
                     Customizable soup with deep flavors. Broth prepared the day before for
                     enhanced taste. Options to add turmeric, rice, or pasta for variation.
                 </div>
-                <div className="recipe-time">
+                <div className={styles["recipe-time"]}>
                     <p>
                         <strong>Prep Time:</strong> Swift (15 minutes)
                     </p>
@@ -26,7 +28,7 @@ export default function RecipieDetails() {
                         <strong>Serving Portions:</strong> Generous (Serves 8)
                     </p>
                 </div>
-                <div className="recipe-ingredients">
+                <div className={styles["recipe-ingredients"]}>
                     <h2>Ingredients:</h2>
                     <ul>
                         <li>1 whole chicken (4 pounds, innards removed)</li>
@@ -44,7 +46,7 @@ export default function RecipieDetails() {
                         <li>2 lemons (thinly sliced)</li>
                     </ul>
                 </div>
-                <div className="recipe-directions">
+                <div className={styles["recipe-directions"]}>
                     <h2>Directions:</h2>
                     <ol>
                         <li>
@@ -61,12 +63,12 @@ export default function RecipieDetails() {
                         </li>
                     </ol>
                 </div>
-                <div className="buttons-div">
-                    <button className="edit-delete-button" type="submit">Edit</button>
-                    <button className="edit-delete-button" type="submit">Delete</button>
+                <div className={styles["buttons-div"]}>
+                    <button className={styles["edit-delete-button"]} type="submit">Edit</button>
+                    <button className={styles["edit-delete-button"]} type="submit">Delete</button>
                 </div>
             </div>
         </div>
-
     );
+
 }

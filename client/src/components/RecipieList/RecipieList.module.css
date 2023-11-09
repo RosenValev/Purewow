@@ -2,6 +2,7 @@
     width: 55%;
     margin: auto;
     padding: 20px;
+    margin-bottom: 60px;
 }
 
 .recipe-image {
@@ -21,7 +22,6 @@
     padding: 20px;
     border: 1px solid;
     border-radius: 15px;
-
 }
 
 .recipe-title {
