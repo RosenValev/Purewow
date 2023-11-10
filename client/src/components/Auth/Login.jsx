@@ -5,7 +5,7 @@ export default function Login() {
         <>
             <div className={styles["login-register-div"]}>
                 <div className={styles["login-register-box"]}>
-                    <h2>Welcome</h2>
+                    <h2>Login</h2>
                     <form >
                         <div>
                             <label htmlFor="username">Username:</label>

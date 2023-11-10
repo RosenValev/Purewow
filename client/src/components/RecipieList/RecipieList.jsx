@@ -16,7 +16,7 @@ export default function RecipieList() {
 
     return (
         <div className={styles.container}>
-            <h3>Choose recipie and start cooking!</h3>
+            <h3>Choose recipie and start cooking.</h3>
             <div className={styles.recipies}>
                 {recipies.map(recipie =>
                     <RecipieListItem key={recipie._id} {...recipie} />

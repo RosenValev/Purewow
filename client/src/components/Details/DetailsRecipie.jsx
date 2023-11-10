@@ -1,29 +1,28 @@
-import styles from './RecipieDetails.module.css'
-
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
 
+import styles from './DetailsRecipie.module.css'
 const baseURL = "http://localhost:3000/recipies"
 
-
-export default function RecipieDetails() {
-    const { recipieId } = useParams();
-    const [recipie, setRecipie] = useState({})
+export default function DetailsRecipie() {
+    const { id } = useParams();
+    const [recipie, setRecepie] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/recipies/654d02d8e577ee46929f7b54`)
+        fetch(`${baseURL}/${id}`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('Not found');
                 }
-
                 return res.json();
             })
-            .then(setRecipie)
+            .then(setRecepie)
             .catch((err) => {
                 navigate('/recipies');
             });
-    }, [recipieId]);
+    }, [id]);
+
 
     return (
         <div className={styles['recipie-container']}>
@@ -31,7 +30,7 @@ export default function RecipieDetails() {
                 <div className={styles["recipe-title"]}>{recipie.title}</div>
                 <img
                     className={styles["recipe-image"]}
-                    src="https://publish.purewow.net/wp-content/uploads/sites/2/2019/09/spicy-lemon-ginger-chicken-soup-recipe.jpg?resize=728%2C921"
+                    src={recipie.imageUrl}
                     alt="Spicy Lemon-Ginger Chicken Soup"
                 />
                 <div className={styles["recipe-description"]}>
@@ -53,13 +52,11 @@ export default function RecipieDetails() {
                 </div>
                 <div className={styles["recipe-ingredients"]}>
                     <h2>Ingredients:</h2>
-
                     <p>{recipie.ingredients}</p>
                 </div>
                 <div className={styles["recipe-directions"]}>
                     <h2>Directions:</h2>
-                    <p> {recipie.directions}
-                    </p>
+                    <p> {recipie.directions}</p>
                 </div>
                 <div className={styles["buttons-div"]}>
                     <button className={styles["edit-delete-button"]} type="submit">Edit</button>
@@ -68,5 +65,4 @@ export default function RecipieDetails() {
             </div>
         </div>
     );
-
 }
