@@ -2,7 +2,6 @@ const User = require('../models/User.js');
 const generateToken = require('../utils/generateToken.js');
 const bcrypt = require('bcrypt');
 
-
 //GET ALL
 const getAll = async (req, res) => {
     try {
@@ -59,7 +58,6 @@ const createOne = async (req, res) => {
             id: userCreated._id,
             username: userCreated.username,
             email: userCreated.email,
-            avatar: userCreated.avatar,
             createdAt: userCreated.createdAt,
             updatedAt: userCreated.updatedAt,
             // token,
@@ -143,7 +141,6 @@ const login = async (req, res) => {
             id: user._id,
             username: user.username,
             email: user.email,
-            avatar: user.avatar,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
             token,

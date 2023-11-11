@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Username is required'],
-        minLength: [3, 'Username must be at least 3 characters long'],
+        minLength: [3, 'must be at least 3 characters long'],
     },
     email: {
         type: String,
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Email already exists',
         },
-        minLength: [7, 'Email must be at least 7 characters long'],
+        minLength: [7, 'must be at least 7 characters long'],
     },
     password: {
         type: String,

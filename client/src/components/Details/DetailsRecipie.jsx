@@ -31,7 +31,7 @@ export default function DetailsRecipie() {
                 <img
                     className={styles["recipe-image"]}
                     src={recipie.imageUrl}
-                    alt="Spicy Lemon-Ginger Chicken Soup"
+                    alt={recipie.title}
                 />
                 <div className={styles["recipe-description"]}>
                     {recipie.description}
