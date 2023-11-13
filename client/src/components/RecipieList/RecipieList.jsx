@@ -11,6 +11,7 @@ export default function RecipieList() {
         fetch(baseURL)
             .then(res => res.json())
             .then(data => setRecipies(data))
+            .catch(err => console.log(err))
     }, [])
 
 
