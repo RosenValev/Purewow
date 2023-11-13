@@ -10,7 +10,7 @@ export default function RecipieListItem({
 }) {
 
     return (
-        <Card style={{ width: '22rem' }}>
+        <Card style={{ width: '14rem' }}>
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>

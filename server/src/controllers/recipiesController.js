@@ -1,15 +1,19 @@
 const Recipie = require('../models/Recipie.js');
+const jwt = require('jsonwebtoken');
+const { SECRET } = require('../utils/secret.js')
 
 //CREATE
 const createRecipie = async (req, res) => {
     try {
-        const { title, imageUrl, description, prepTime, cookTime, totalTime, serves, ingredients, directions } = req.body;
+        const { title, imageUrl, description, prepTime, cookTime, totalTime, serves, ingredients, directions, token } = req.body;
 
         if (!title || !imageUrl || !description || !prepTime || !cookTime || !totalTime || !serves || !ingredients || !directions) {
             return res.status(404).json({ message: `All fields are required!` });
         }
 
-        const createdRecipie = await Recipie.create(req.body);
+        const decodedToken = await jwt.verify(token, SECRET);
+        const createdRecipie = await Recipie.create({ title, imageUrl, description, prepTime, cookTime, totalTime, serves, ingredients, directions, owner: decodedToken._id });
+
         res.status(200).json(createdRecipie);
     } catch (err) {
         console.log(err.message);
