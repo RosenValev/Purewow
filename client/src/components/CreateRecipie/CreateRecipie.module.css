@@ -6,6 +6,9 @@
 
 h2 {
     text-align: center;
+    font-family: Roboto;
+    font-size: 55px;
+
 }
 
 
@@ -22,7 +25,8 @@ h2 {
 
 .create-container-info label {
     display: block;
-    font-size: 17px;
+    font-size: 18px;
+    font-family: Roboto;
 }
 
 .create-container-info input {

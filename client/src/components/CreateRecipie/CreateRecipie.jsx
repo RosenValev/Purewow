@@ -1,7 +1,7 @@
 import styles from './CreateRecipie.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import * as recipieApi from '../../services/recipieAPI.js'
+import * as recipieApi from '../../services/recipieApi.js'
 
 
 let formInitialState = {

@@ -1,8 +1,7 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import * as recipieApi from "../../services/recipieApi.js"
 import styles from './DetailsRecipie.module.css'
-const baseURL = "http://localhost:3000/recipies"
 
 export default function DetailsRecipie() {
     const { id } = useParams();
@@ -10,15 +9,10 @@ export default function DetailsRecipie() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${baseURL}/${id}`)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Not found');
-                }
-                return res.json();
-            })
+        recipieApi.getOne(id)
             .then(setRecepie)
             .catch((err) => {
+                console.log(err)
                 navigate('/recipies');
             });
     }, [id]);
