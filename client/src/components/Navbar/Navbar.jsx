@@ -7,11 +7,10 @@ import { Link } from 'react-router-dom'
 
 export default function Navigation() {
     return (
-        <Navbar bg="light" data-bs-theme="light">
+        <Navbar data-bs-theme="light" className={styles.navbar} >
             <Container fluid >
-                <Navbar.Brand href="#home">PureWow</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/home" className={styles.logo}>PureWow</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
                     <Nav.Link as={Link} to="/recipies">Recipies</Nav.Link>
                     {/* for Guests */}
                     <Nav.Link as={Link} to="/login">Login</Nav.Link>

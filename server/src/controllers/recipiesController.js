@@ -35,6 +35,20 @@ const getAllRecipies = async (req, res) => {
     }
 }
 
+//GET LAST THREE RECIPIES
+const getLastThreeRecipies = async (req, res) => {
+    try {
+        const lastThreeRecipies = await Recipie.find().sort({ createdAt: -1 }).limit(3)
+        if (!lastThreeRecipies) {
+            return res.status(404).json({ message: `Recipies not found` });
+        }
+        res.status(200).json(lastThreeRecipies);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ message: err.message });
+    }
+}
+
 //GET BY ID
 const getRecipieById = async (req, res) => {
     const { id } = req.params;
@@ -56,5 +70,6 @@ const getRecipieById = async (req, res) => {
 module.exports = {
     createRecipie,
     getAllRecipies,
-    getRecipieById
+    getRecipieById,
+    getLastThreeRecipies
 }

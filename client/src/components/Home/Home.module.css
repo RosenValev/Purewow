@@ -1,5 +1,5 @@
 .main {
-    width: 55%;
+    width: 60%;
     margin: auto;
     padding: 20px;
     margin-bottom: 60px;
@@ -10,25 +10,31 @@
     font-weight: 300;
     font-size: 45px;
     text-align: center;
+    padding-bottom: 15px;
+    font-style: italic
 
 }
 
 .home {
-    background-color: #fff;
     padding: 20px;
     border: 1px solid;
     border-radius: 15px;
 }
 
-
-.main h2 {
-    font-size: 27px;
-    font-weight: 400;
+.info {
     text-align: center;
+
 }
 
-.main img {
-    width: 80%;
-    margin: auto;
-    display: block;
+.container h2 {
+    font-weight: 300;
+    text-align: center;
+    padding: 15px;
+    font-style: italic
+}
+
+.recipies {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }

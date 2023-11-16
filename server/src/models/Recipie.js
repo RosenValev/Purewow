@@ -40,15 +40,18 @@ const recipieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Directions is required'],
     },
-    likes: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
+    commentList: [{
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+        },
+        comment: String,
     }],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-});
+}, { timestamps: true });
 
 const Recipie = mongoose.model('Recipie', recipieSchema);
 

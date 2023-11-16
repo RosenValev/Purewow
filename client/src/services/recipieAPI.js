@@ -3,8 +3,17 @@ const baseURL = 'http://localhost:3000/recipies';
 export const getAll = async () => {
     const response = await fetch(baseURL);
     const result = await response.json();
+    console.log(result)
     return result
 };
+
+
+export const lastThree = async () => {
+    const response = await fetch(`${baseURL}/last`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+}
 
 export const getOne = async (id) => {
     const response = await fetch(`${baseURL}/${id}`);
