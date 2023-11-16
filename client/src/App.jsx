@@ -3,6 +3,7 @@ import Login from "./components/Auth/Login.jsx"
 import Register from "./components/Auth/Register.jsx"
 import CreateRecipie from "./components/CreateRecipie/CreateRecipie.jsx"
 import DetailsRecipie from "./components/Details/DetailsRecipie.jsx"
+import EditRecipie from "./components/Edit/EditRecipie.jsx"
 import Footer from "./components/Footer/Footer.jsx"
 import Home from "./components/Home/Home.jsx"
 import Navigation from "./components/Navbar/Navbar.jsx"
@@ -18,6 +19,8 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/recipies" element={<RecipieList />} />
                 <Route path="/create-recipie" element={<CreateRecipie />} />
+                <Route path="/recipies/edit/:id" element={<EditRecipie/>} />
+                <Route path="/recipies/delete/:id" element={<edit />} />
                 <Route path="/recipies/:id" element={<DetailsRecipie />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

@@ -1,4 +1,4 @@
-.create-container {
+.edit-container {
     width: 40%;
     margin: auto;
     padding: 20px;
@@ -12,7 +12,7 @@ h2 {
 }
 
 
-.create-container-info {
+.edit-container-info {
     margin: auto;
     background-color: white;
     border: 1px solid rgb(156, 152, 152);
@@ -23,13 +23,13 @@ h2 {
 
 }
 
-.create-container-info label {
+.edit-container-info label {
     display: block;
     font-size: 18px;
     font-family: Roboto;
 }
 
-.create-container-info input {
+.edit-container-info input {
     background-color: #ece8e8;
     border: 0.1px solid black;
     border-radius: 10px;
@@ -39,7 +39,7 @@ h2 {
     font-size: 15px;
 }
 
-.create-container-info textarea {
+.edit-container-info textarea {
     width: 60%;
     margin-bottom: 5px;
     font-size: 15px;

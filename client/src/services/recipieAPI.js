@@ -21,6 +21,7 @@ export const getOne = async (id) => {
         throw new Error('Not found')
     }
     const result = await response.json();
+    console.log(result)
     return result;
 }
 

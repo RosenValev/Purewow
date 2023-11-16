@@ -136,7 +136,7 @@ const login = async (req, res) => {
         }
 
         const token = generateToken(user);
-        res.cookie('auth', token, { httpOnly: true, Path: "/", sameSite: "none", secure: true });
+        // res.cookie('auth', token, { httpOnly: true, Path: "/", sameSite: "none", secure: true });
         const data = {
             id: user._id,
             username: user.username,

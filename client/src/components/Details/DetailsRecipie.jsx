@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import * as recipieApi from "../../services/recipieApi.js"
+import * as recipieApi from '../../services/recipieApi.js'
 import styles from './DetailsRecipie.module.css'
+import { Link } from 'react-router-dom'
 
 export default function DetailsRecipie() {
     const { id } = useParams();
@@ -53,8 +54,8 @@ export default function DetailsRecipie() {
                     <p> {recipie.directions}</p>
                 </div>
                 <div className={styles["buttons-div"]}>
-                    <button className={styles["edit-delete-button"]} type="submit">Edit</button>
-                    <button className={styles["edit-delete-button"]} type="submit">Delete</button>
+                    <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} recipie={recipie} type="submit">Edit</Link>
+                    <Link to={`/recipies/delete/${id}`} className={styles["edit-delete-button"]} type="submit">Delete</Link>
                 </div>
             </div>
         </div>

@@ -1,69 +1,32 @@
-import styles from './CreateRecipie.module.css'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import styles from './EditRecipie.module.css'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as recipieApi from '../../services/recipieApi.js'
 
-
-let formInitialState = {
-    title: "",
-    imageUrl: "",
-    description: "",
-    prepTime: "",
-    cookTime: "",
-    totalTime: "",
-    serves: "",
-    ingredients: "",
-    directions: "",
-};
-
-export default function CreateRecipie() {
-    const [formValues, setFormValues] = useState(formInitialState);
-    const [errors, setErrors] = useState({});
+export default function EditRecipie() {
+    const [recipie, setRecipie] = useState({})
     const navigate = useNavigate();
+    const { id } = useParams()
 
-    const changeHandler = (e) => {
-        let value = e.target.value;
-        setFormValues(state => ({ ...state, [e.target.name]: value }));
-    };
-
-    const resetFormHandler = () => {
-        setFormValues(formInitialState);
-        setErrors({});
-    };
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
-        const data = { ...formValues, token }
-        const response = await recipieApi.create(data)
-        if (!response.ok) {
-            setErrors(state => ({ ...state, registerError: response.message }));
-        }
-        if (response.title === formValues.title) {
-            console.log('new recipie created!')
-            resetFormHandler();
-            navigate('/recipies');
-        }
-    }
+    useEffect(() => {
+        recipieApi.getOne(id)
+            .then(setRecipie)
+            .catch((err) => console.log(err));
+    }, [])
 
     return (
-        <section className={styles["create-container"]}>
-            <div className={styles["create-container-info"]}>
-                <h2>Create your recipie </h2>
-
-                {errors.registerError && (
-                    <p className={styles.errorMessage} >{errors.registerError}</p>
-                )}
-
-                <form onSubmit={submitHandler}>
+        <section className={styles["edit-container"]}>
+            <div className={styles["edit-container-info"]}>
+                <h2>Edit your recipie </h2>
+                <form >
                     <div >
                         <label htmlFor="title">Title:</label>
                         <input
                             type="text"
                             id="title"
                             name="title"
-                            value={formValues.title}
-                            onChange={changeHandler}
+                            defaultValue={recipie.title}
+
                         />
                     </div>
                     <div >
@@ -72,8 +35,8 @@ export default function CreateRecipie() {
                             type="text"
                             id="imageUrl"
                             name="imageUrl"
-                            value={formValues.imageUrl}
-                            onChange={changeHandler}
+                            defaultValue={recipie.imageUrl}
+
                         />
                     </div>
                     <div>
@@ -82,8 +45,8 @@ export default function CreateRecipie() {
                             type="text"
                             id="description"
                             name="description"
-                            value={formValues.description}
-                            onChange={changeHandler}
+                            defaultValue={recipie.description}
+
                         />
                     </div>
                     <div>
@@ -92,8 +55,7 @@ export default function CreateRecipie() {
                             type="number"
                             id="prepTime"
                             name="prepTime"
-                            value={formValues.prepTime}
-                            onChange={changeHandler}
+
                         />
                     </div>
                     <div>
@@ -102,8 +64,7 @@ export default function CreateRecipie() {
                             type="number"
                             id="cookTime"
                             name="cookTime"
-                            value={formValues.cookTime}
-                            onChange={changeHandler}
+
                         />
                     </div>
                     <div>
@@ -112,8 +73,7 @@ export default function CreateRecipie() {
                             type="number"
                             id="totalTime"
                             name="totalTime"
-                            value={formValues.totalTime}
-                            onChange={changeHandler}
+
                         />
                     </div>
                     <div>
@@ -122,8 +82,7 @@ export default function CreateRecipie() {
                             type="number"
                             id="serves"
                             name="serves"
-                            value={formValues.serves}
-                            onChange={changeHandler}
+
                         />
                     </div>
                     <div>
@@ -132,8 +91,7 @@ export default function CreateRecipie() {
                             type="text"
                             id="ingredients"
                             name="ingredients"
-                            value={formValues.ingredients}
-                            onChange={changeHandler}
+
                         />
                     </div>
                     <div >
@@ -142,11 +100,10 @@ export default function CreateRecipie() {
                             id="directions"
                             name="directions"
                             type="text"
-                            value={formValues.directions}
-                            onChange={changeHandler}
+
                         />
                     </div>
-                    <button type="submit">Create</button>
+                    <button type="submit">Save</button>
                 </form>
             </div>
         </section >
