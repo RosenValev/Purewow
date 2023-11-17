@@ -1,7 +1,8 @@
 .create-container {
-    width: 40%;
+    width: 50%;
     margin: auto;
     padding: 20px;
+    margin-bottom: 50px;
 }
 
 h2 {
@@ -34,13 +35,13 @@ h2 {
     border: 0.1px solid black;
     border-radius: 10px;
     height: 29px;
-    width: 60%;
+    width: 70%;
     margin-bottom: 5px;
     font-size: 15px;
 }
 
 .create-container-info textarea {
-    width: 60%;
+    width: 70%;
     margin-bottom: 5px;
     font-size: 15px;
     border-radius: 10px;
