@@ -14,7 +14,6 @@
     margin: auto;
     padding-bottom: 20px;
     padding-top: 20px;
-
 }
 
 .recipe-details {
@@ -28,7 +27,7 @@
     width: 50%;
     font-size: 30px;
     font-weight: bold;
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 10px;
     margin: auto;
     text-align: center;
