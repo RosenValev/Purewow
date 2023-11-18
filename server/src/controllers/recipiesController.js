@@ -17,7 +17,7 @@ const createRecipie = async (req, res) => {
         res.status(200).json(createdRecipie);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -31,7 +31,7 @@ const getAllRecipies = async (req, res) => {
         res.status(200).json(recipies);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 }
 
@@ -45,7 +45,7 @@ const getLastThreeRecipies = async (req, res) => {
         res.status(200).json(lastThreeRecipies);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 }
 
@@ -63,7 +63,22 @@ const getRecipieById = async (req, res) => {
         res.status(200).json(recipie);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
+    }
+}
+
+//DELETE 
+const deleteRecipie = async (req, res) => {
+    const { id } = req.params
+    try {
+        const deletedRecipie = await Recipie.findByIdAndDelete(id).lean()
+        if (!deletedRecipie) {
+            return res.status(404).json({ message: `Recipie not found! with ID ${id}` });
+        }
+        res.status(200).json({ message: `Recipie with ID ${id} deleted successfully` })
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json({ message: err.message });
     }
 }
 
@@ -71,5 +86,6 @@ module.exports = {
     createRecipie,
     getAllRecipies,
     getRecipieById,
-    getLastThreeRecipies
+    getLastThreeRecipies,
+    deleteRecipie,
 }

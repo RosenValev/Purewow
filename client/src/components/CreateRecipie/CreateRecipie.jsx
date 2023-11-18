@@ -36,13 +36,17 @@ export default function CreateRecipie() {
         const token = localStorage.getItem('token');
         const data = { ...formValues, token }
         const response = await recipieApi.create(data)
-        if (!response.ok) {
-            setErrors(state => ({ ...state, registerError: response.message }));
-        }
-        if (response.title === formValues.title) {
-            console.log('new recipie created!')
-            resetFormHandler();
-            navigate('/recipies');
+        try {
+            if (response.title === formValues.title) {
+                console.log('new recipie created!')
+                resetFormHandler();
+                navigate('/recipies');
+            }
+            if (!response.ok) {
+                setErrors(state => ({ ...state, registerError: response.message }));
+            }
+        } catch (err) {
+            console.log("Error: " + err.message)
         }
     }
 

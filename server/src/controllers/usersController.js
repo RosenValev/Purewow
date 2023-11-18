@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
         res.status(200).json(users);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -28,7 +28,7 @@ const getOne = async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -65,7 +65,7 @@ const createOne = async (req, res) => {
         res.status(200).json(data);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -97,7 +97,7 @@ const updateOne = async (req, res) => {
         res.status(200).json(updatedUser);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -112,7 +112,7 @@ const deleteOne = async (req, res) => {
         res.status(200).json(user)
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -148,13 +148,13 @@ const login = async (req, res) => {
         res.status(200).json(data);
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
 };
 
 //LOGOUT
 const logout = (req, res) => {
-    res.clearCookie('auth');
+    // res.clearCookie('auth');
     res.status(200).json({ success: 'Logged out successfully!' });
 };
 

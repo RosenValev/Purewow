@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as recipieApi from '../../services/recipieApi.js'
 
-export default function EditRecipie() {
+export default function EditRecipie({
+}) {
     const [recipie, setRecipie] = useState({})
     const navigate = useNavigate();
     const { id } = useParams()

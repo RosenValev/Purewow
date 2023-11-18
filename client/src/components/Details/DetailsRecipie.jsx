@@ -19,6 +19,17 @@ export default function DetailsRecipie() {
     }, [id]);
 
 
+    const deleteRecipieHandler = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await recipieApi.deleteOne(id)
+            navigate('/recipies');
+        } catch (err) {
+            console.log("Error: " + err.message)
+        }
+    }
+
+
     return (
         <div className={styles['recipie-container']}>
             <div className={styles["recipe-details"]}>
@@ -54,8 +65,8 @@ export default function DetailsRecipie() {
                     <p> {recipie.directions}</p>
                 </div>
                 <div className={styles["buttons-div"]}>
-                    <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} recipie={recipie} type="submit">Edit</Link>
-                    <Link to={`/recipies/delete/${id}`} className={styles["edit-delete-button"]} type="submit">Delete</Link>
+                    <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} type="submit">Edit</Link>
+                    <button className={styles["edit-delete-button"]} onClick={deleteRecipieHandler} type="button">Delete</button>
                 </div>
             </div>
         </div>

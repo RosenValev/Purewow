@@ -9,7 +9,7 @@ export default function Navigation() {
     return (
         <Navbar data-bs-theme="light" className={styles.navbar} >
             <Container fluid >
-                <Navbar.Brand as={Link} to="/home" className={styles.logo}>PureWow</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className={styles.logo}>PureWow</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/recipies">Recipies</Nav.Link>
                     {/* for Guests */}

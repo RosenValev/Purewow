@@ -13,24 +13,27 @@ const recipieSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, 'bookReview is required'],
-        minLength: [10, 'bookReview must be at least 10 characters long'],
+        required: [true, 'description is required'],
     },
     prepTime: {
         type: Number,
         required: [true, 'prepTime is required'],
+        min: 1,
     },
     cookTime: {
         type: Number,
         required: [true, 'cookTime is required'],
+        min: 1,
     },
     totalTime: {
         type: Number,
         required: [true, 'totalTime is required'],
+        min: 1,
     },
     serves: {
         type: Number,
         required: [true, 'Serves is required'],
+        min: [1, "Must be possitive number"]
     },
     ingredients: {
         type: String,

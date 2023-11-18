@@ -8,7 +8,7 @@ function generateToken(user) {
         email: user.email
     }
 
-    const token = jwt.sign(payload, SECRET, { expiresIn: '1d' });
+    const token = jwt.sign(payload, SECRET, { expiresIn: '12h' });
     return token;
 }
 
