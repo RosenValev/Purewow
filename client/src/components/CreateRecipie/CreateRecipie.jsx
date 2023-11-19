@@ -2,7 +2,7 @@ import styles from './CreateRecipie.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as recipieApi from '../../services/recipieApi.js'
-
+import { useForm } from '../../hooks/useForm.js'
 
 let formInitialState = {
     title: "",
@@ -17,14 +17,9 @@ let formInitialState = {
 };
 
 export default function CreateRecipie() {
-    const [formValues, setFormValues] = useState(formInitialState);
+    const { formValues, setFormValues, onChangeHandler } = useForm(formInitialState);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
-    const changeHandler = (e) => {
-        let value = e.target.value;
-        setFormValues(state => ({ ...state, [e.target.name]: value }));
-    };
 
     const resetFormHandler = () => {
         setFormValues(formInitialState);
@@ -34,11 +29,11 @@ export default function CreateRecipie() {
     const submitHandler = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
-        const data = { ...formValues, token }
+        const data = { ...formValues, token };
         try {
             const response = await recipieApi.create(data)
             if (response.title === formValues.title) {
-                console.log('new recipie created!')
+                console.log('new recipie created!');
                 resetFormHandler();
                 navigate('/recipies');
             }
@@ -67,7 +62,7 @@ export default function CreateRecipie() {
                             id="title"
                             name="title"
                             value={formValues.title}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div >
@@ -77,7 +72,7 @@ export default function CreateRecipie() {
                             id="imageUrl"
                             name="imageUrl"
                             value={formValues.imageUrl}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -87,7 +82,7 @@ export default function CreateRecipie() {
                             id="description"
                             name="description"
                             value={formValues.description}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -97,7 +92,7 @@ export default function CreateRecipie() {
                             id="prepTime"
                             name="prepTime"
                             value={formValues.prepTime}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -107,7 +102,7 @@ export default function CreateRecipie() {
                             id="cookTime"
                             name="cookTime"
                             value={formValues.cookTime}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -117,7 +112,7 @@ export default function CreateRecipie() {
                             id="totalTime"
                             name="totalTime"
                             value={formValues.totalTime}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -127,7 +122,7 @@ export default function CreateRecipie() {
                             id="serves"
                             name="serves"
                             value={formValues.serves}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -137,7 +132,7 @@ export default function CreateRecipie() {
                             id="ingredients"
                             name="ingredients"
                             value={formValues.ingredients}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div >
@@ -147,7 +142,7 @@ export default function CreateRecipie() {
                             name="directions"
                             type="text"
                             value={formValues.directions}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <button type="submit">Create</button>

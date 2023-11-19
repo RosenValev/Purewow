@@ -2,6 +2,7 @@ import styles from './Auth.module.css'
 import { useState } from 'react'
 import * as userApi from '../../services/userApi.js'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from '../../hooks/useForm.js'
 
 let formInitialState = {
     username: "",
@@ -11,14 +12,9 @@ let formInitialState = {
 };
 
 export default function Register() {
-    const [formValues, setFormValues] = useState(formInitialState);
+    const { formValues, setFormValues, onChangeHandler } = useForm(formInitialState)
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
-    const changeHandler = (e) => {
-        let value = e.target.value;
-        setFormValues(state => ({ ...state, [e.target.name]: value }));
-    };
 
     const resetFormHandler = () => {
         setFormValues(formInitialState);
@@ -27,13 +23,17 @@ export default function Register() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const response = await userApi.create(formValues);
-        if (!response.ok) {
-            setErrors(state => ({ ...state, registerError: response.message }));
-        }
-        if (response.username == formValues.username) {
-            resetFormHandler();
-            navigate('/home');
+        try {
+            const response = await userApi.create(formValues);
+            if (response.username == formValues.username) {
+                resetFormHandler();
+                navigate('/home');
+            }
+            if (!response.ok) {
+                setErrors(state => ({ ...state, registerError: response.message }));
+            }
+        } catch (err) {
+            console.log("Error: " + err.message);
         }
     };
 
@@ -54,7 +54,7 @@ export default function Register() {
                             name="username"
                             id="username"
                             value={formValues.username}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                             placeholder="Enter your username" />
                     </div>
                     <div>
@@ -64,7 +64,7 @@ export default function Register() {
                             name="email"
                             id="email"
                             value={formValues.email}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                             placeholder="Enter your email" />
                     </div>
                     <div>
@@ -74,7 +74,7 @@ export default function Register() {
                             name="password"
                             id="password"
                             value={formValues.password}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                             placeholder="Enter your password" />
                     </div>
                     <div>
@@ -84,7 +84,7 @@ export default function Register() {
                             name="repeatPassword"
                             id="repeatPassword"
                             value={formValues.repeatPassword}
-                            onChange={changeHandler}
+                            onChange={onChangeHandler}
                             placeholder="Repeat password" />
                     </div>
                     <div>

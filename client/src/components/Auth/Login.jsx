@@ -24,7 +24,8 @@ export default function Login() {
         try {
             const response = await userApi.login(formValues);
             if (response.username == formValues.username) {
-                localStorage.setItem('authToken', response.token)
+                localStorage.setItem('authToken', response.token);
+                localStorage.setItem('_id', response.id);
                 resetFormHandler();
                 navigate('/');
             }
