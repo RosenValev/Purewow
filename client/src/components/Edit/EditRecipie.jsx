@@ -3,11 +3,23 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as recipieApi from '../../services/recipieApi.js'
 
-export default function EditRecipie({
-}) {
-    const [recipie, setRecipie] = useState({})
+let formInitialState = {
+    title: "",
+    imageUrl: "",
+    description: "",
+    prepTime: "",
+    cookTime: "",
+    totalTime: "",
+    serves: "",
+    ingredients: "",
+    directions: "",
+};
+
+export default function EditRecipie() {
+    const { id } = useParams();
     const navigate = useNavigate();
-    const { id } = useParams()
+    const [recipie, setRecipie] = useState(formInitialState);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         recipieApi.getOne(id)
@@ -15,19 +27,46 @@ export default function EditRecipie({
             .catch((err) => console.log(err));
     }, [])
 
+    const onChangeHandler = (e) => {
+        setRecipie(state => ({ ...state, [e.target.name]: e.target.value }));
+    }
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault()
+        console.log(recipie)
+        try {
+            const response = await recipieApi.updateOne(id, recipie)
+            if (response.title === recipie.title) {
+                setRecipie(formInitialState);
+                setErrors({});
+                navigate('/recipies');
+            }
+            if (!response.ok) {
+                setErrors(state => ({ ...state, registerError: response.message }));
+            }
+        } catch (err) {
+            console.log("Error: " + err.message);
+        }
+    }
+
     return (
         <section className={styles["edit-container"]}>
             <div className={styles["edit-container-info"]}>
                 <h2>Edit your recipie </h2>
-                <form >
+
+                {errors.registerError && (
+                    <p className={styles.errorMessage} >{errors.registerError}</p>
+                )}
+
+                <form onSubmit={onSubmitForm}>
                     <div >
                         <label htmlFor="title">Title:</label>
                         <input
                             type="text"
                             id="title"
                             name="title"
-                            defaultValue={recipie.title}
-
+                            value={recipie.title}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div >
@@ -36,8 +75,8 @@ export default function EditRecipie({
                             type="text"
                             id="imageUrl"
                             name="imageUrl"
-                            defaultValue={recipie.imageUrl}
-
+                            value={recipie.imageUrl}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -46,8 +85,8 @@ export default function EditRecipie({
                             type="text"
                             id="description"
                             name="description"
-                            defaultValue={recipie.description}
-
+                            value={recipie.description}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -56,7 +95,8 @@ export default function EditRecipie({
                             type="number"
                             id="prepTime"
                             name="prepTime"
-
+                            value={recipie.prepTime}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -65,7 +105,8 @@ export default function EditRecipie({
                             type="number"
                             id="cookTime"
                             name="cookTime"
-
+                            value={recipie.cookTime}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -74,7 +115,8 @@ export default function EditRecipie({
                             type="number"
                             id="totalTime"
                             name="totalTime"
-
+                            value={recipie.totalTime}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -83,7 +125,8 @@ export default function EditRecipie({
                             type="number"
                             id="serves"
                             name="serves"
-
+                            value={recipie.serves}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div>
@@ -92,21 +135,23 @@ export default function EditRecipie({
                             type="text"
                             id="ingredients"
                             name="ingredients"
-
+                            value={recipie.ingredients}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <div >
                         <label htmlFor="directions">Directions:</label>
                         <textarea
+                            type="text"
                             id="directions"
                             name="directions"
-                            type="text"
-
+                            value={recipie.directions}
+                            onChange={onChangeHandler}
                         />
                     </div>
                     <button type="submit">Save</button>
                 </form>
             </div>
         </section >
-    );
-}
+    )
+};

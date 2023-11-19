@@ -8,7 +8,7 @@ export const getAll = async () => {
 };
 
 
-export const lastThree = async () => {
+export const getLastThree = async () => {
     const response = await fetch(`${baseURL}/last-three`);
     const result = await response.json();
     console.log(result);
@@ -41,5 +41,14 @@ export const deleteOne = async (id) => {
     });
     const result = await response.json()
     return result
+}
 
+export const updateOne = async (id, recipie) => {
+    const response = await fetch(`${baseURL}/${id}/edit`, {
+        method: 'PATCH',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(recipie)
+    });
+    const result = await response.json()
+    return result
 }

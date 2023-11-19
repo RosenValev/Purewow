@@ -82,10 +82,50 @@ const deleteRecipie = async (req, res) => {
     }
 }
 
+//EDIT
+const editRecipie = async (req, res) => {
+    const { id } = req.params;
+    const {
+        title,
+        imageUrl,
+        description,
+        prepTime,
+        cookTime,
+        totalTime,
+        serves,
+        ingredients,
+        directions,
+    } = req.body;
+
+    try {
+        const updatedRecipie = await Recipie.findByIdAndUpdate(id,
+            {
+                title,
+                imageUrl,
+                description,
+                prepTime,
+                cookTime,
+                totalTime,
+                serves,
+                ingredients,
+                directions,
+            },
+            { new: true, runValidators: true })
+        if (!updatedRecipie) {
+            return res.status(404).json({ message: `Recipie not found! with ID ${id}` });
+        }
+        res.status(200).json(updatedRecipie)
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     createRecipie,
     getAllRecipies,
     getRecipieById,
     getLastThreeRecipies,
     deleteRecipie,
+    editRecipie,
 }

@@ -6,9 +6,8 @@ import RecipieListItem from '../RecipieListItem/RecipieListItem.jsx'
 export default function Home() {
     const [lastThreeRecipies, setLastThreeRecipies] = useState([])
 
-
     useEffect(() => {
-        recipieApi.lastThree()
+        recipieApi.getLastThree()
             .then(result => setLastThreeRecipies(result))
             .catch(err => console.log(err))
     }, [])
