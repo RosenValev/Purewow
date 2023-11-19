@@ -35,8 +35,8 @@ export default function CreateRecipie() {
         e.preventDefault();
         const token = localStorage.getItem('token');
         const data = { ...formValues, token }
-        const response = await recipieApi.create(data)
         try {
+            const response = await recipieApi.create(data)
             if (response.title === formValues.title) {
                 console.log('new recipie created!')
                 resetFormHandler();
@@ -46,7 +46,7 @@ export default function CreateRecipie() {
                 setErrors(state => ({ ...state, registerError: response.message }));
             }
         } catch (err) {
-            console.log("Error: " + err.message)
+            console.log("Error: " + err.message);
         }
     }
 

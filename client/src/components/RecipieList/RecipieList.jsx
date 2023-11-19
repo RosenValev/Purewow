@@ -12,6 +12,8 @@ export default function RecipieList() {
             .catch(err => console.log(err))
     }, [])
 
+    console.log(localStorage)
+
     return (
         <div className={styles.container}>
             <h3>Choose recipie, start and enjoy cooking.</h3>

@@ -2,37 +2,37 @@ import styles from './Auth.module.css'
 import { useState } from 'react'
 import * as userApi from '../../services/userApi.js'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from '../../hooks/useForm.js'
 
-let formInitialState = {
+let initialFormValues = {
     username: "",
     password: "",
-};
+}
 
 export default function Login() {
-    const [formValues, setFormValues] = useState(formInitialState);
+    const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    const changeHandler = (e) => {
-        let value = e.target.value;
-        setFormValues(state => ({ ...state, [e.target.name]: value }));
-    };
-
     const resetFormHandler = () => {
-        setFormValues(formInitialState);
+        setFormValues(initialFormValues);
         setErrors({});
     };
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const response = await userApi.login(formValues);
-        if (!response.ok) {
-            setErrors(state => ({ ...state, registerError: response.message }));
-        }
-        if (response.username == formValues.username) {
-            localStorage.setItem('token', response.token)
-            resetFormHandler();
-            navigate('/home');
+        try {
+            const response = await userApi.login(formValues);
+            if (response.username == formValues.username) {
+                localStorage.setItem('authToken', response.token)
+                resetFormHandler();
+                navigate('/');
+            }
+            if (!response.ok) {
+                setErrors(state => ({ ...state, registerError: response.message }));
+            }
+        } catch (err) {
+            console.log("Error: " + err.message)
         }
     };
 
@@ -54,7 +54,7 @@ export default function Login() {
                                 name="username"
                                 id="username"
                                 value={formValues.username}
-                                onChange={changeHandler}
+                                onChange={onChangeHandler}
                                 placeholder="Enter your username" />
                         </div>
                         <div>
@@ -64,7 +64,7 @@ export default function Login() {
                                 name="password"
                                 id="password"
                                 value={formValues.password}
-                                onChange={changeHandler}
+                                onChange={onChangeHandler}
                                 placeholder="Enter your password" />
                         </div>
                         <div>

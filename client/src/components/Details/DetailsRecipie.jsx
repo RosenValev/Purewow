@@ -20,10 +20,10 @@ export default function DetailsRecipie() {
             });
     }, [id]);
 
-    const handleClickDelete = () => {
+    const deleteClickHandler = () => {
         setShowDeleteModal(true)
     }
-    const handleCloseDelete = () => {
+    const closeDeleteModalHandler = () => {
         setShowDeleteModal(false)
     }
 
@@ -37,11 +37,10 @@ export default function DetailsRecipie() {
         }
     }
 
-
     return (
         <>  {showDeleteModal && <DeleteRecipieModal
-            open={handleClickDelete}
-            close={handleCloseDelete}
+            open={deleteClickHandler}
+            close={closeDeleteModalHandler}
             confirmDelete={deleteRecipieHandler}
         />}
 
@@ -80,7 +79,7 @@ export default function DetailsRecipie() {
                     </div>
                     <div className={styles["buttons-div"]}>
                         <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} type="submit">Edit</Link>
-                        <button className={styles["edit-delete-button"]} onClick={handleClickDelete} type="button">Delete</button>
+                        <button className={styles["edit-delete-button"]} onClick={deleteClickHandler} type="button">Delete</button>
                     </div>
                 </div>
             </div>

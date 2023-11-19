@@ -18,7 +18,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/recipies" element={<RecipieList />} />
                 <Route path="/create-recipie" element={<CreateRecipie />} />
-                <Route path="/recipies/edit/:id" element={<EditRecipie/>} />
+                <Route path="/recipies/edit/:id" element={<EditRecipie />} />
                 <Route path="/recipies/:id" element={<DetailsRecipie />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
