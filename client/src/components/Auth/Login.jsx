@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as userApi from '../../services/userApi.js'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
+import { useAuth } from '../../contexts/authContext.jsx'
 
 let initialFormValues = {
     username: "",
@@ -13,6 +14,7 @@ export default function Login() {
     const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    const { token, updateToken } = useAuth();
 
     const resetFormHandler = () => {
         setFormValues(initialFormValues);
@@ -24,8 +26,7 @@ export default function Login() {
         try {
             const response = await userApi.login(formValues);
             if (response.username == formValues.username) {
-                localStorage.setItem('authToken', response.token);
-                localStorage.setItem('_id', response.id);
+                updateToken(response.token)
                 resetFormHandler();
                 navigate('/');
             }

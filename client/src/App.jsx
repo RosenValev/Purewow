@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom"
+import { AuthProvider } from './contexts/authContext.jsx'
 import Login from "./components/Auth/Login.jsx"
 import Register from "./components/Auth/Register.jsx"
 import CreateRecipie from "./components/CreateRecipie/CreateRecipie.jsx"
@@ -9,22 +10,24 @@ import Home from "./components/Home/Home.jsx"
 import Navigation from "./components/Navbar/Navbar.jsx"
 import RecipieList from "./components/RecipieList/RecipieList.jsx"
 
-function App() {
 
+function App() {
     return (
-        <>
-            <Navigation />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/recipies" element={<RecipieList />} />
-                <Route path="/create-recipie" element={<CreateRecipie />} />
-                <Route path="/recipies/edit/:id" element={<EditRecipie />} />
-                <Route path="/recipies/:id" element={<DetailsRecipie />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
-            <Footer />
-        </>
+        <AuthProvider>
+            <>
+                <Navigation />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/recipies" element={<RecipieList />} />
+                    <Route path="/create-recipie" element={<CreateRecipie />} />
+                    <Route path="/recipies/edit/:id" element={<EditRecipie />} />
+                    <Route path="/recipies/:id" element={<DetailsRecipie />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+                <Footer />
+            </>
+        </AuthProvider>
     )
 }
 

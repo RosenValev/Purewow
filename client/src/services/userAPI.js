@@ -33,3 +33,11 @@ export const login = async (data) => {
     const result = await response.json();
     return result;
 }
+
+export const logout = async () => {
+    const response = await fetch(`${baseURL}/logout`, {
+        method: 'POST',
+    })
+    const result = await response.json();
+    return result;
+}
