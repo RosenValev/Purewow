@@ -39,7 +39,7 @@ export default function DetailsRecipie() {
 
     return (
         <>  {showDeleteModal && <DeleteRecipieModal
-            open={deleteClickHandler}
+            open={showDeleteModal}
             close={closeDeleteModalHandler}
             confirmDelete={deleteRecipieHandler}
         />}

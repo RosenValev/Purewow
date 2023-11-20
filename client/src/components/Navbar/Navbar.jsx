@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext.jsx'
 
 export default function Navigation() {
-    const { token, updateToken, updateUser } = useAuth();
+    const { token, updateToken, updateUser, loggedUser } = useAuth();
 
     const onLogout = async () => {
         const result = await userApi.logout();
@@ -26,7 +26,7 @@ export default function Navigation() {
                     {token ? (
                         <>
                             <Nav.Link as={Link} to="/create-recipie">Create recipie</Nav.Link>
-                            <Nav.Link as={Link} to="/my-profile">My Profile</Nav.Link>
+                            <Nav.Link as={Link} to="/my-profile">{`${loggedUser.username}'s profile`}</Nav.Link>
                             <Nav.Link as={Link} to="" onClick={onLogout}>Logout</Nav.Link>
                         </>
                     ) : (

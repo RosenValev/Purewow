@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const Recipie = require('../models/Recipie.js')
 const generateToken = require('../utils/generateToken.js');
 const bcrypt = require('bcrypt');
 
@@ -21,11 +22,12 @@ const getOne = async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById(id)
-
         if (!user) {
             return res.status(404).json({ message: `User not found! with ID ${id}` });
         }
-        res.status(200).json(user);
+
+        const myProfileRecipies = await Recipie.find({ owner: id }).populate('owner')
+        res.status(200).json(myProfileRecipies);
     } catch (err) {
         console.log(err.message);
         res.status(400).json({ message: err.message });

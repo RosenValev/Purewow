@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer.jsx"
 import Home from "./components/Home/Home.jsx"
 import Navigation from "./components/Navbar/Navbar.jsx"
 import RecipieList from "./components/RecipieList/RecipieList.jsx"
+import MyProfile from "./components/MyProfile/MyProfile.jsx"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/create-recipie" element={<CreateRecipie />} />
                     <Route path="/recipies/edit/:id" element={<EditRecipie />} />
                     <Route path="/recipies/:id" element={<DetailsRecipie />} />
+                    <Route path="/my-profile" element={<MyProfile />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Routes>
