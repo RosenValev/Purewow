@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as userApi from '../../services/userApi.js'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
+import { Link } from 'react-router-dom'
 
 let formInitialState = {
     username: "",
@@ -92,7 +93,7 @@ export default function Register() {
                     </div>
                 </form>
                 <div>
-                    <p>  Have an account? <a href="#">Login</a></p>
+                    <p> Have an account? <Link to={"/login"}>Login</Link></p>
                 </div>
             </div>
         </div >

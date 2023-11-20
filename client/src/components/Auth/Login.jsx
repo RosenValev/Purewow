@@ -4,6 +4,7 @@ import * as userApi from '../../services/userApi.js'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
 import { useAuth } from '../../contexts/authContext.jsx'
+import { Link } from 'react-router-dom'
 
 let initialFormValues = {
     username: "",
@@ -75,7 +76,7 @@ export default function Login() {
                         </div>
                     </form>
                     <div>
-                        <p>Don't have account? <a href="#">Register</a></p>
+                        <p> Don't have account? <Link to={"/register"}>Register</Link></p>
                     </div>
                 </div>
             </div>
