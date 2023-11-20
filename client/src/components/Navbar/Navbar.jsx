@@ -7,12 +7,13 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext.jsx'
 
 export default function Navigation() {
-    const { token, updateToken } = useAuth();
+    const { token, updateToken, updateUser } = useAuth();
 
     const onLogout = async () => {
         const result = await userApi.logout();
         if (result.success) {
-            updateToken()
+            updateToken();
+            updateUser({});
         }
     };
 

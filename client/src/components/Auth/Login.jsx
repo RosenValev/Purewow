@@ -13,8 +13,8 @@ let initialFormValues = {
 export default function Login() {
     const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
+    const { updateToken, updateUser } = useAuth();
     const navigate = useNavigate();
-    const { token, updateToken } = useAuth();
 
     const resetFormHandler = () => {
         setFormValues(initialFormValues);
@@ -26,7 +26,8 @@ export default function Login() {
         try {
             const response = await userApi.login(formValues);
             if (response.username == formValues.username) {
-                updateToken(response.token)
+                updateToken(response.token);
+                updateUser(response);
                 resetFormHandler();
                 navigate('/');
             }
