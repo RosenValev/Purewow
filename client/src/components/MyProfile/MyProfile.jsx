@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../contexts/authContext.jsx'
-import RecipieListItem from '../RecipieListItem/RecipieListItem.jsx'
+
 import * as userApi from '../../services/userApi.js'
 import styles from './MyProfile.module.css'
 
+import RecipieListItem from '../RecipieListItem/RecipieListItem.jsx'
+
 
 export default function MyProfile() {
-    const { loggedUser } = useAuth()
+    const { userId } = useAuth()
     const [recipies, setRecipies] = useState([])
 
     useEffect(() => {
-        userApi.getOne(loggedUser._id)
+        userApi.getOne(userId)
             .then(setRecipies)
             .catch(err => console.log(err))
-
     }, [])
 
     return (
@@ -34,7 +35,6 @@ export default function MyProfile() {
                         <h3>There are no own recipies yet...</h3>
                     </div>
                 )}
-
             </div>
         </section>
     );

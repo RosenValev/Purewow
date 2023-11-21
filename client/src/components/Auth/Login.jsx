@@ -1,10 +1,10 @@
-import styles from './Auth.module.css'
 import { useState } from 'react'
-import * as userApi from '../../services/userApi.js'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
 import { useAuth } from '../../contexts/authContext.jsx'
-import { Link } from 'react-router-dom'
+
+import * as userApi from '../../services/userApi.js'
+import styles from './Auth.module.css'
 
 let initialFormValues = {
     username: "",
@@ -14,7 +14,7 @@ let initialFormValues = {
 export default function Login() {
     const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
-    const { updateToken, updateUser } = useAuth();
+    const { updateAuth } = useAuth();
     const navigate = useNavigate();
 
     const resetFormHandler = () => {
@@ -27,8 +27,7 @@ export default function Login() {
         try {
             const response = await userApi.login(formValues);
             if (response.username == formValues.username) {
-                updateToken(response.token);
-                updateUser(response);
+                updateAuth(response)
                 resetFormHandler();
                 navigate('/');
             }

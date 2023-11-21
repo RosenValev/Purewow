@@ -1,9 +1,9 @@
-import styles from './Auth.module.css'
 import { useState } from 'react'
-import * as userApi from '../../services/userApi.js'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
-import { Link } from 'react-router-dom'
+
+import * as userApi from '../../services/userApi.js'
+import styles from './Auth.module.css'
 
 let formInitialState = {
     username: "",
