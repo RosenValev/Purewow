@@ -52,3 +52,14 @@ export const updateOne = async (id, recipie) => {
     const result = await response.json()
     return result
 }
+
+export const addCommentToRecipie = async (id, { userId, comment }) => {
+    const response = await fetch(`${baseURL}/${id}/add-comment`, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({userId, comment})
+    });
+    const result = await response.json()
+    return result
+
+}

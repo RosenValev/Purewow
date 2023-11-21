@@ -14,22 +14,22 @@ export default function DetailsRecipie() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [recipie, setRecepie] = useState({});
-    const { userId, isAuthenticated } = useContext(AuthContext)
-    const { formValues, setFormValues, onChangeHandler } = useForm({ comment: "" })
+    const { userId, isAuthenticated } = useContext(AuthContext);
+    const { formValues, setFormValues, onChangeHandler } = useForm({ comment: "" });
     const [comments, setComments] = useState([]);
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showAddCommentModal, setShowAddCommentModal] = useState(false);
 
     useEffect(() => {
         recipieApi.getOne(id)
             .then(setRecepie)
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 navigate('/recipies');
             });
     }, [id]);
 
-    const isAuthor = userId == recipie.owner?._id
+    const isAuthor = userId == recipie.owner?._id;
 
     const handleShowDeleteModal = () => {
         setShowDeleteModal(true);
@@ -45,21 +45,27 @@ export default function DetailsRecipie() {
     }
 
     const deleteRecipieHandler = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const response = await recipieApi.deleteOne(id)
+            const response = await recipieApi.deleteOne(id);
             navigate('/recipies');
         } catch (err) {
-            console.log("Error: " + err.message)
+            console.log("Error: " + err.message);
         }
     }
 
     const addCommentHandler = (e) => {
-        e.preventDefault()
-        console.log(formValues)
-        setFormValues({ comment: "" })
-        handleCloseModal()
-
+        e.preventDefault();
+        if (formValues.comment !== "") {
+            recipieApi.addCommentToRecipie(id, { userId, comment: formValues.comment })
+                .then(result => {
+                    if (result.success) {
+                        setFormValues({ comment: "" });
+                        handleCloseModal();
+                    }
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     return (

@@ -5,6 +5,7 @@ recipiesRouter.get('/', recipieController.getAllRecipies);
 recipiesRouter.get('/last-three', recipieController.getLastThreeRecipies);
 recipiesRouter.get('/:id', recipieController.getRecipieById);
 recipiesRouter.post('/create', recipieController.createRecipie);
+recipiesRouter.post('/:id/add-comment', recipieController.addComment);
 recipiesRouter.patch('/:id/edit', recipieController.editRecipie);
 recipiesRouter.delete('/:id/delete', recipieController.deleteRecipie);
 

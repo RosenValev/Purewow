@@ -121,6 +121,24 @@ const editRecipie = async (req, res) => {
     }
 }
 
+//ADD COMMENT
+const addComment = async (req, res) => {
+    const { id } = req.params;
+    const { userId, comment } = req.body
+
+    try {
+        const newComment = await Recipie.findOneAndUpdate({ _id: id }, { $push: { commentList: { userId, comment } } })
+        if (!newComment) {
+            return res.status(404).json({ message: `Comment not added successfully` });
+        }
+
+        return res.status(201).json({ success: `Comment: ${comment} - added successfully!` })
+    } catch (err) {
+        console.log(err.message);
+        res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     createRecipie,
     getAllRecipies,
@@ -128,4 +146,5 @@ module.exports = {
     getLastThreeRecipies,
     deleteRecipie,
     editRecipie,
+    addComment,
 }
