@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 
 import styles from './Home.module.css'
 import * as recipieApi from '../../services/recipieApi.js'
 
 import RecipieListItem from '../RecipieListItem/RecipieListItem.jsx'
-import AuthContext from '../../contexts/authContext.jsx'
 
 export default function Home() {
     const [lastThreeRecipies, setLastThreeRecipies] = useState([])
@@ -14,10 +13,6 @@ export default function Home() {
             .then(result => setLastThreeRecipies(result))
             .catch(err => console.log(err))
     }, [])
-
-    const { isAuthenticated, username} = useContext(AuthContext);
-    console.log(isAuthenticated)
-    console.log(username)
 
     return (
         <div className={styles.main}>

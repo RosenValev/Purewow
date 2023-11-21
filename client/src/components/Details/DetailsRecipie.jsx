@@ -1,17 +1,24 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { useForm } from '../../hooks/useForm.js';
 
 import * as recipieApi from '../../services/recipieApi.js'
 import styles from './DetailsRecipie.module.css'
 
 import DeleteRecipieModal from '../DeleteRecipieModal/DeleteRecipieModal.jsx';
+import AuthContext from '../../contexts/authContext.jsx';
+import AddCommentModal from '../AddCommentModal/AddCommentModal.jsx';
 
 export default function DetailsRecipie() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [recipie, setRecepie] = useState({});
+    const { userId, isAuthenticated } = useContext(AuthContext)
+    const { formValues, setFormValues, onChangeHandler } = useForm({ comment: "" })
+    const [comments, setComments] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const navigate = useNavigate();
+    const [showAddCommentModal, setShowAddCommentModal] = useState(false);
 
     useEffect(() => {
         recipieApi.getOne(id)
@@ -22,11 +29,19 @@ export default function DetailsRecipie() {
             });
     }, [id]);
 
-    const deleteClickHandler = () => {
-        setShowDeleteModal(true)
+    const isAuthor = userId == recipie.owner?._id
+
+    const handleShowDeleteModal = () => {
+        setShowDeleteModal(true);
     }
-    const closeDeleteModalHandler = () => {
-        setShowDeleteModal(false)
+
+    const handleShowAddCommentModal = () => {
+        setShowAddCommentModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setShowDeleteModal(false);
+        setShowAddCommentModal(false);
     }
 
     const deleteRecipieHandler = async (e) => {
@@ -39,12 +54,31 @@ export default function DetailsRecipie() {
         }
     }
 
+    const addCommentHandler = (e) => {
+        e.preventDefault()
+        console.log(formValues)
+        setFormValues({ comment: "" })
+        handleCloseModal()
+
+    }
+
     return (
-        <>  {showDeleteModal && <DeleteRecipieModal
-            open={showDeleteModal}
-            close={closeDeleteModalHandler}
-            confirmDelete={deleteRecipieHandler}
-        />}
+        <>  {showDeleteModal &&
+            <DeleteRecipieModal
+                open={showDeleteModal}
+                close={handleCloseModal}
+                confirmDelete={deleteRecipieHandler}
+            />}
+
+            {showAddCommentModal &&
+                <AddCommentModal
+                    open={showAddCommentModal}
+                    close={handleCloseModal}
+                    confirmComment={addCommentHandler}
+                    changeHandler={onChangeHandler}
+                    formValues={formValues}
+                />}
+
 
             <div className={styles['recipie-container']}>
                 <div className={styles["recipe-details"]}>
@@ -80,8 +114,25 @@ export default function DetailsRecipie() {
                         <p> {recipie.directions}</p>
                     </div>
                     <div className={styles["buttons-div"]}>
-                        <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} type="submit">Edit</Link>
-                        <button className={styles["edit-delete-button"]} onClick={deleteClickHandler} type="button">Delete</button>
+
+                        {isAuthenticated &&
+                            <>
+                                {isAuthor ? (
+                                    <>
+                                        <Link to={`/recipies/edit/${id}`} className={styles["edit-delete-button"]} type="submit">Edit</Link>
+                                        <button className={styles["edit-delete-button"]} onClick={handleShowDeleteModal} type="button">Delete</button>
+                                    </>
+                                ) : (
+                                    < button className={styles["comment-button"]} onClick={handleShowAddCommentModal} type="button">Add comment</button>
+                                )}
+                            </>
+                        }
+
+                    </div>
+
+                    <div className="details-comments">
+                        <h3>Comments are placed here!</h3>
+
                     </div>
                 </div>
             </div>
