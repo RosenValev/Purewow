@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react'
-import { useAuth } from '../../contexts/authContext.jsx'
+import { useState, useEffect, useContext } from 'react'
 
 import * as userApi from '../../services/userApi.js'
 import styles from './MyProfile.module.css'
 
 import RecipieListItem from '../RecipieListItem/RecipieListItem.jsx'
-
+import AuthContext from '../../contexts/authContext.jsx'
 
 export default function MyProfile() {
-    const { userId } = useAuth()
+    const { userId } = useContext(AuthContext);
     const [recipies, setRecipies] = useState([])
 
     useEffect(() => {

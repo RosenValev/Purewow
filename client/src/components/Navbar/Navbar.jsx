@@ -1,22 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext.jsx'
+import { useContext } from "react";
 
 import styles from './Navbar.module.css'
-import * as userApi from '../../services/userApi.js'
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import AuthContext from '../../contexts/authContext.jsx';
 
 export default function Navigation() {
-    const { isAuthenticated, username, updateAuth } = useAuth();
-
-    const onLogout = async () => {
-        const result = await userApi.logout();
-        if (result.success) {
-            updateAuth({});
-        }
-    };
+    const { isAuthenticated, username } = useContext(AuthContext);
 
     return (
         <Navbar data-bs-theme="light" className={styles.navbar} >
@@ -28,7 +21,7 @@ export default function Navigation() {
                         <>
                             <Nav.Link as={Link} to="/create-recipie">Create recipie</Nav.Link>
                             <Nav.Link as={Link} to="/my-profile">{`${username}'s profile`}</Nav.Link>
-                            <Nav.Link as={Link} to="" onClick={onLogout}>Logout</Nav.Link>
+                            <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
                         </>
                     ) : (
                         <>

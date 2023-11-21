@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
-import { useAuth } from '../../contexts/authContext.jsx'
 
 import * as userApi from '../../services/userApi.js'
 import styles from './Auth.module.css'
+import AuthContext from '../../contexts/authContext.jsx'
 
 let initialFormValues = {
     username: "",
@@ -14,7 +14,7 @@ let initialFormValues = {
 export default function Login() {
     const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
-    const { updateAuth } = useAuth();
+    const { updateAuth } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const resetFormHandler = () => {

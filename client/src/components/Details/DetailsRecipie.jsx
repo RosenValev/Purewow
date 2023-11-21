@@ -1,8 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+
 import * as recipieApi from '../../services/recipieApi.js'
 import styles from './DetailsRecipie.module.css'
-import { Link } from 'react-router-dom'
+
 import DeleteRecipieModal from '../DeleteRecipieModal/DeleteRecipieModal.jsx';
 
 export default function DetailsRecipie() {
