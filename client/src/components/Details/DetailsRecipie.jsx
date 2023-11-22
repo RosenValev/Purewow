@@ -14,7 +14,7 @@ export default function DetailsRecipie() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [recipie, setRecepie] = useState({});
-    const { userId, isAuthenticated } = useContext(AuthContext);
+    const { userId, username, isAuthenticated } = useContext(AuthContext);
     const { formValues, setFormValues, onChangeHandler } = useForm({ comment: "" });
     const [comments, setComments] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -22,12 +22,17 @@ export default function DetailsRecipie() {
 
     useEffect(() => {
         recipieApi.getOne(id)
-            .then(setRecepie)
+            .then(result => {
+                setRecepie(result);
+                setComments(result.commentList)
+            })
             .catch((err) => {
                 console.log(err);
                 navigate('/recipies');
             });
     }, [id]);
+
+    console.log(comments)
 
     const isAuthor = userId == recipie.owner?._id;
 
@@ -57,9 +62,10 @@ export default function DetailsRecipie() {
     const addCommentHandler = (e) => {
         e.preventDefault();
         if (formValues.comment !== "") {
-            recipieApi.addCommentToRecipie(id, { userId, comment: formValues.comment })
+            recipieApi.addCommentToRecipie(id, { username, comment: formValues.comment })
                 .then(result => {
                     if (result.success) {
+                        setComments(result.success.commentList)
                         setFormValues({ comment: "" });
                         handleCloseModal();
                     }

@@ -44,10 +44,7 @@ const recipieSchema = new mongoose.Schema({
         required: [true, 'Directions is required'],
     },
     commentList: [{
-        userId: {
-            type: mongoose.Types.ObjectId,
-            ref: 'User',
-        },
+        username: String,
         comment: String,
     }],
     owner: {

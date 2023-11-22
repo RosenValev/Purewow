@@ -26,7 +26,7 @@ export default function EditRecipie() {
         recipieApi.getOne(id)
             .then(setRecipie)
             .catch((err) => console.log(err));
-    }, [])
+    }, [id])
 
     const onChangeHandler = (e) => {
         setRecipie(state => ({ ...state, [e.target.name]: e.target.value }));
