@@ -33,7 +33,6 @@ export default function DetailsRecipie() {
     }, [id]);
 
     console.log(comments)
-
     const isAuthor = userId == recipie.owner?._id;
 
     const handleShowDeleteModal = () => {
