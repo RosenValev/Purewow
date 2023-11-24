@@ -9,6 +9,7 @@ import styles from './DetailsRecipie.module.css'
 import DeleteRecipieModal from '../DeleteRecipieModal/DeleteRecipieModal.jsx';
 import AuthContext from '../../contexts/authContext.jsx';
 import AddCommentModal from '../AddCommentModal/AddCommentModal.jsx';
+import Comment from '../Comment/Comment.jsx';
 
 export default function DetailsRecipie() {
     const navigate = useNavigate();
@@ -124,6 +125,7 @@ export default function DetailsRecipie() {
                         <h2>Directions:</h2>
                         <p> {recipie.directions}</p>
                     </div>
+                    
                     <div className={styles["buttons-div"]}>
 
                         {isAuthenticated &&
@@ -138,13 +140,23 @@ export default function DetailsRecipie() {
                                 )}
                             </>
                         }
-
                     </div>
+
 
                     <div className="details-comments">
                         <h3>Comments are placed here!</h3>
 
+                        {comments.length === 0 ? (
+                            <p className="no-comment">No comments.</p>
+                        ) : (
+                            <ul>
+                                {comments.map(c => (
+                                    <Comment key={c._id} {...c} />
+                                ))}
+                            </ul>
+                        )}
                     </div>
+
                 </div>
             </div>
         </>
