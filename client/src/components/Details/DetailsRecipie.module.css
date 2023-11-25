@@ -69,6 +69,14 @@
 
 }
 
+
+
+.details-comments p {
+    list-style-type: none;
+    font-size: 20px;
+    text-align: center;
+}
+
 .recipe-directions {
     margin-top: 20px;
     width: 85%;

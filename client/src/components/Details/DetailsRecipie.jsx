@@ -125,7 +125,21 @@ export default function DetailsRecipie() {
                         <h2>Directions:</h2>
                         <p> {recipie.directions}</p>
                     </div>
-                    
+
+                    <div className={styles["details-comments"]}>
+                        <h2>Comments from our customers:</h2>
+
+                        {comments.length === 0 ? (
+                            <p className={styles["no-comment"]}>There are no comments for this recipie yet.</p>
+                        ) : (
+                            <ul>
+                                {comments.map(c => (
+                                    <Comment key={c._id} {...c} />
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+
                     <div className={styles["buttons-div"]}>
 
                         {isAuthenticated &&
@@ -140,21 +154,6 @@ export default function DetailsRecipie() {
                                 )}
                             </>
                         }
-                    </div>
-
-
-                    <div className="details-comments">
-                        <h3>Comments are placed here!</h3>
-
-                        {comments.length === 0 ? (
-                            <p className="no-comment">No comments.</p>
-                        ) : (
-                            <ul>
-                                {comments.map(c => (
-                                    <Comment key={c._id} {...c} />
-                                ))}
-                            </ul>
-                        )}
                     </div>
 
                 </div>
