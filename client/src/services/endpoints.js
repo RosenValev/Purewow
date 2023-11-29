@@ -7,3 +7,11 @@ export const recipiesEndpoints = {
     updateOne: (id) => `/recipies/${id}/edit`,
     addCommentToRecipie: (id) => `/recipies/${id}/add-comment`,
 }
+
+export const usersEndpoints = {
+    getOne: (id) => `/users/${id}`,
+    getAll: '/users',
+    create: '/users/register',
+    login: '/users/login',
+    logout: '/users/logout',
+}
