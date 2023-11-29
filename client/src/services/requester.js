@@ -1,13 +1,6 @@
-import { useContext } from "react";
-import { useNavigate } from 'react-router-dom';
-
-import AuthContext from "../contexts/authContext.jsx";
-
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = 'http://localhost:3000';
 
 async function request(method, url, data) {
-    const { token, username } = useContext(AuthContext);
-    const navigate = useNavigate();
 
     const options = {
         method,
@@ -19,10 +12,10 @@ async function request(method, url, data) {
         options.body = JSON.stringify(data);
     }
 
-    const user = username;
+    const token = localStorage.getItem('token')
 
-    if (user) {
-        options.headers['Auth'] = token;
+    if (token) {
+        options.headers['Auth'] = token
     }
 
     try {
@@ -30,7 +23,7 @@ async function request(method, url, data) {
         if (!response.ok) {
             if (response.status === 403) {
                 localStorage.removeItem('token');
-                navigate('/login');
+                // navigate('/login');  //TODO different aproach
             }
             const error = await response.json();
             return error;
