@@ -1,11 +1,13 @@
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from "../contexts/authContext.jsx";
 
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'http://localhost:3000/';
 
 async function request(method, url, data) {
     const { token, username } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const options = {
         method,
@@ -27,7 +29,8 @@ async function request(method, url, data) {
         const response = await fetch(BASE_URL + url, options);
         if (!response.ok) {
             if (response.status === 403) {
-                // TODO clearUserData();
+                localStorage.removeItem('token');
+                navigate('/login');
             }
             const error = await response.json();
             return error;
@@ -43,4 +46,5 @@ async function request(method, url, data) {
 export const get = request.bind(null, 'GET');
 export const post = request.bind(null, 'POST');
 export const patch = request.bind(null, 'PATCH');
+export const put = request.bind(null, 'PUT');
 export const del = request.bind(null, 'DELETE');

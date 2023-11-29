@@ -14,7 +14,8 @@ export default function Logout() {
             .then(result => {
                 if (result.success) {
                     updateAuth({});
-                    navigate("/")
+                    localStorage.removeItem('token');
+                    navigate("/");
                 }
             })
             .catch(err => console.log(err))

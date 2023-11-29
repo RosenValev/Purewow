@@ -28,7 +28,7 @@ export default function Register() {
             const response = await userApi.create(formValues);
             if (response.username == formValues.username) {
                 resetFormHandler();
-                navigate('/home');
+                navigate('/login');
             }
             if (!response.ok) {
                 setErrors(state => ({ ...state, registerError: response.message }));

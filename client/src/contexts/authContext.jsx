@@ -1,9 +1,10 @@
 import { createContext, useState } from 'react';
+import usePersistedState from '../hooks/usePersistedState.js';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({})
+    const [auth, setAuth] = usePersistedState('Authorization', {});
 
     const updateAuth = (obj) => {
         setAuth(obj);
