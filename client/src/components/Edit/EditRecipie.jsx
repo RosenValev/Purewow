@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { validateRecipieData } from '../../utils/validationForm.js';
 
 import styles from './EditRecipie.module.css'
 import * as recipieApi from '../../services/recipieApi.js'
@@ -34,13 +35,19 @@ export default function EditRecipie() {
 
     const onSubmitForm = async (e) => {
         e.preventDefault()
-        console.log(recipie)
         try {
+            setErrors({});
+            const validationErrors = validateRecipieData(recipie);
+
+            if (Object.keys(validationErrors).length > 0) {
+                return setErrors(state => ({ ...state, validationErrors }));
+            }
+
             const response = await recipieApi.updateOne(id, recipie)
             if (response.title === recipie.title) {
                 setRecipie(formInitialState);
                 setErrors({});
-                navigate('/recipies');
+                navigate(-1);
             }
             if (!response.ok) {
                 setErrors(state => ({ ...state, registerError: response.message }));
@@ -70,6 +77,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.title && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.title}</p>
+                    )}
                     <div >
                         <label htmlFor="imageUrl">Image URL:</label>
                         <input
@@ -80,6 +90,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.imageUrl && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.imageUrl}</p>
+                    )}
                     <div>
                         <label htmlFor="description">Description:</label>
                         <textarea
@@ -90,6 +103,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.description && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.description}</p>
+                    )}
                     <div>
                         <label htmlFor="prepTime">Prep Time (minutes):</label>
                         <input
@@ -100,6 +116,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.prepTime && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.prepTime}</p>
+                    )}
                     <div>
                         <label htmlFor="cookTime">Cook Time (minutes):</label>
                         <input
@@ -110,6 +129,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.cookTime && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.cookTime}</p>
+                    )}
                     <div>
                         <label htmlFor="totalTime">Total Time (minutes):</label>
                         <input
@@ -120,6 +142,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.totalTime && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.totalTime}</p>
+                    )}
                     <div>
                         <label htmlFor="serves">Serves:</label>
                         <input
@@ -130,6 +155,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.serves && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.serves}</p>
+                    )}
                     <div>
                         <label htmlFor="ingredients">Ingredients:</label>
                         <textarea
@@ -140,6 +168,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.ingredients && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.ingredients}</p>
+                    )}
                     <div >
                         <label htmlFor="directions">Directions:</label>
                         <textarea
@@ -150,6 +181,9 @@ export default function EditRecipie() {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    {errors.validationErrors?.directions && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.directions}</p>
+                    )}
                     <button type="submit">Save</button>
                 </form>
             </div>

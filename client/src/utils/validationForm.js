@@ -56,7 +56,7 @@ export const validateRecipieData = (formValues) => {
     if (formValues.imageUrl === "") {
         validationErrors.imageUrl = 'ImageUrl is required';
     } else if (formValues.imageUrl !== "" && !httpReggex.test(formValues.imageUrl)) {
-        validationErrors.imageUrl = 'Invalid URL, must start with http';
+        validationErrors.imageUrl = 'Invalid URL, must start with http...';
     }
 
     if (formValues.description === "") {
@@ -94,7 +94,6 @@ export const validateRecipieData = (formValues) => {
     if (formValues.directions === "") {
         validationErrors.directions = 'Directions is required';
     }
-
 
     return validationErrors;
 }
