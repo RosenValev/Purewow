@@ -63,5 +63,7 @@ p {
 
 .errorMessage {
     color: red;
-    font-size: 20px;
+    font-size: 15px;
+    background-color:rgb(235, 201, 201);
+    border-radius: 5px;
 }

@@ -25,13 +25,29 @@ export default function Login() {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            let validationErrors = {};
+            setErrors({});
+            if (formValues.username == "") {
+                validationErrors.username = 'Username is required';
+            }
+
+            if (formValues.password.length < 3) {
+                validationErrors.password = 'Password must be at least 3 characters long'
+            }
+
+            if (Object.keys(validationErrors).length > 0) {
+                return setErrors(state => ({ ...state, validationErrors }));
+            }
+
             const response = await userApi.login(formValues);
+
             if (response.username == formValues.username) {
                 updateAuth(response);
                 localStorage.setItem('token', response.token);
                 resetFormHandler();
                 navigate('/');
             }
+
             if (!response.ok) {
                 setErrors(state => ({ ...state, registerError: response.message }));
             }
@@ -61,6 +77,9 @@ export default function Login() {
                                 onChange={onChangeHandler}
                                 placeholder="Enter your username" />
                         </div>
+                        {errors.validationErrors && (
+                            <p className={styles.errorMessage} >{errors.validationErrors.username}</p>
+                        )}
                         <div>
                             <label htmlFor="password">Password:</label>
                             <input
@@ -71,6 +90,9 @@ export default function Login() {
                                 onChange={onChangeHandler}
                                 placeholder="Enter your password" />
                         </div>
+                        {errors.validationErrors && (
+                            <p className={styles.errorMessage} >{errors.validationErrors.password}</p>
+                        )}
                         <div>
                             <button className={styles["login-reg-button"]} type="submit">Login</button>
                         </div>
