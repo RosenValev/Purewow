@@ -4,7 +4,6 @@ const recipieSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'title is required'],
-        minLength: [2, 'title must be at least 2 characters long'],
     },
     imageUrl: {
         type: String,
@@ -18,17 +17,17 @@ const recipieSchema = new mongoose.Schema({
     prepTime: {
         type: Number,
         required: [true, 'prepTime is required'],
-        min: 1,
+        min: [1, "Must be possitive number"]
     },
     cookTime: {
         type: Number,
         required: [true, 'cookTime is required'],
-        min: 1,
+        min: [1, "Must be possitive number"]
     },
     totalTime: {
         type: Number,
         required: [true, 'totalTime is required'],
-        min: 1,
+        min: [1, "Must be possitive number"]
     },
     serves: {
         type: Number,
