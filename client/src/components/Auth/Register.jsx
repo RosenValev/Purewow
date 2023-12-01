@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
+import { validateRegisterData } from '../../utils/validationForm.js'
 
 import * as userApi from '../../services/userApi.js'
 import styles from './Auth.module.css'
@@ -25,6 +26,13 @@ export default function Register() {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            setErrors({});
+            const validationErrors = validateRegisterData(formValues);
+
+            if (Object.keys(validationErrors).length > 0) {
+                return setErrors(state => ({ ...state, validationErrors }));
+            }
+
             const response = await userApi.create(formValues);
             if (response.username == formValues.username) {
                 resetFormHandler();
@@ -58,6 +66,9 @@ export default function Register() {
                             onChange={onChangeHandler}
                             placeholder="Enter your username" />
                     </div>
+                    {errors.validationErrors?.username && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.username}</p>
+                    )}
                     <div>
                         <label htmlFor="email">Email:</label>
                         <input
@@ -68,6 +79,9 @@ export default function Register() {
                             onChange={onChangeHandler}
                             placeholder="Enter your email" />
                     </div>
+                    {errors.validationErrors?.email && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.email}</p>
+                    )}
                     <div>
                         <label htmlFor="password">Password:</label>
                         <input
@@ -78,6 +92,9 @@ export default function Register() {
                             onChange={onChangeHandler}
                             placeholder="Enter your password" />
                     </div>
+                    {errors.validationErrors?.password && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.password}</p>
+                    )}
                     <div>
                         <label htmlFor="repeatPassword">Repeat password:</label>
                         <input
@@ -88,6 +105,9 @@ export default function Register() {
                             onChange={onChangeHandler}
                             placeholder="Repeat password" />
                     </div>
+                    {errors.validationErrors?.repeatPassword && (
+                        <p className={styles.errorMessage} >{errors.validationErrors.repeatPassword}</p>
+                    )}
                     <div>
                         <button className={styles["login-reg-button"]} type="submit" >Register</button>
                     </div>

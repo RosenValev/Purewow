@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Email already exists',
         },
-        minLength: [7, 'must be at least 7 characters long'],
+        minLength: [5, 'must be at least 5 characters long'],
     },
     password: {
         type: String,
