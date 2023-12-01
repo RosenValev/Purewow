@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
+import { validateLoginData } from '../../utils/validationForm.js'
 
 import * as userApi from '../../services/userApi.js'
 import styles from './Auth.module.css'
@@ -25,15 +26,8 @@ export default function Login() {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            let validationErrors = {};
             setErrors({});
-            if (formValues.username == "") {
-                validationErrors.username = 'Username is required';
-            }
-
-            if (formValues.password.length < 3) {
-                validationErrors.password = 'Password must be at least 3 characters long'
-            }
+            const validationErrors = validateLoginData(formValues)
 
             if (Object.keys(validationErrors).length > 0) {
                 return setErrors(state => ({ ...state, validationErrors }));
@@ -77,7 +71,7 @@ export default function Login() {
                                 onChange={onChangeHandler}
                                 placeholder="Enter your username" />
                         </div>
-                        {errors.validationErrors && (
+                        {errors.validationErrors?.username && (
                             <p className={styles.errorMessage} >{errors.validationErrors.username}</p>
                         )}
                         <div>
@@ -90,7 +84,7 @@ export default function Login() {
                                 onChange={onChangeHandler}
                                 placeholder="Enter your password" />
                         </div>
-                        {errors.validationErrors && (
+                        {errors.validationErrors?.password && (
                             <p className={styles.errorMessage} >{errors.validationErrors.password}</p>
                         )}
                         <div>
