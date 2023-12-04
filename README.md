@@ -57,6 +57,11 @@ This project is licensed under the [MIT License](LICENSE).
 
 Happy cooking and happy coding! 🍲👩‍🍳👨‍🍳
 
+<img src="/client/public/images/screenshot3.png" alt="register">
 
-<img src="/client/public/images/screenshot1.png" alt="mern">
+<img src="/client/public/images/screenshot4.png" alt="login">
+
+<img src="/client/public/images/screenshot2.png" alt="create">
+
+<img src="/client/public/images/screenshot1.png" alt="catalog">
 
