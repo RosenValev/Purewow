@@ -13,7 +13,7 @@ Navigate to server directory, install the dependencies and start the server
 ```
 npm install
 npm run dev
-``
+```
 Navigate to client folder, install the dependencies and start the client in development mode.
 ```
 npm install
