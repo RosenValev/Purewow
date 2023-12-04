@@ -47,7 +47,7 @@ You may need to set up a MongoDB database and configure the connection in the ba
 
 ## Contributing
 
-We welcome contributions! Feel free to submit issues, feature requests, or pull requests.
+Feel free to submit issues, feature requests, or pull requests.
 
 ## License
 
@@ -63,5 +63,8 @@ Happy cooking and happy coding! 🍲👩‍🍳👨‍🍳
 
 <img src="/client/public/images/screenshot2.png" alt="create">
 
-<img src="/client/public/images/screenshot1.png" alt="catalog">
+<img src="/client/public/images/screenshot5.png" alt="personal-profile">
 
+<img src="/client/public/images/screenshot1.png" alt="home">
+
+<img src="/client/public/images/screenshot1.png" alt="catalog">
