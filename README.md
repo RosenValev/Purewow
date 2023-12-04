@@ -57,3 +57,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 Happy cooking and happy coding! 🍲👩‍🍳👨‍🍳
 
+
+<img src="/client/public/images/screenshot1.png" alt="mern">
+
