@@ -65,6 +65,6 @@ Happy cooking and happy coding! 🍲👩‍🍳👨‍🍳
 
 <img src="/client/public/images/screenshot5.png" alt="personal-profile">
 
-<img src="/client/public/images/screenshot1.png" alt="home">
+<img src="/client/public/images/screenshot6.png" alt="home">
 
 <img src="/client/public/images/screenshot1.png" alt="catalog">
