@@ -25,7 +25,12 @@ export default function EditRecipie() {
 
     useEffect(() => {
         recipieApi.getOne(id)
-            .then(setRecipie)
+            .then(result => {
+                if (result.message) {
+                    navigate('/404')
+                }
+                setRecipie(result);
+            })
             .catch((err) => console.log(err));
     }, [id])
 

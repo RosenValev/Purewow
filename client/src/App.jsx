@@ -13,6 +13,7 @@ import Register from "./components/Auth/Register.jsx"
 import Logout from "./components/Logout/Logout.jsx"
 import Footer from "./components/Footer/Footer.jsx"
 import AuthGuard from "./components/AuthGuard/AuthGuard.jsx"
+import PageNotFound from "./components/PageNotFound/404.jsx"
 
 function App() {
     return (
@@ -30,6 +31,8 @@ function App() {
                     <Route path="/my-profile" element={<MyProfile />} />
                     <Route path="/logout" element={<Logout />} />
                 </Route>
+                <Route path="/404" element={<PageNotFound />}></Route>
+                <Route path="*" element={<PageNotFound />}></Route>
             </Routes>
             <Footer />
         </AuthProvider>

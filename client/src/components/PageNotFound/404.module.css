@@ -1,0 +1,15 @@
+
+.container {
+    text-align: center;
+}
+
+.image {
+    width: 50%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+}
+
+.paragraph {
+    color: #954848;
+}

@@ -23,6 +23,9 @@ export default function DetailsRecipie() {
     useEffect(() => {
         recipieApi.getOne(id)
             .then(result => {
+                if (result.message) {
+                    navigate('/404')
+                }
                 setRecepie(result);
                 setComments(result.commentList)
             })
