@@ -7,7 +7,7 @@ export default function PageNotFound() {
         <div className={styles.container}>
             <img
                 className={styles.image}
-                src="../../public/images/404.png"
+                src="/images/404.png"
                 alt="404 Not Found"
             />
             <p><Link to={'/'} className={styles.paragraph}>Go back to Home page</Link></p>
