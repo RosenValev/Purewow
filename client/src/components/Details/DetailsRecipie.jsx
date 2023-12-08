@@ -24,10 +24,10 @@ export default function DetailsRecipie() {
         recipieApi.getOne(id)
             .then(result => {
                 if (result.message) {
-                    navigate('/404')
+                    return navigate('/404');
                 }
                 setRecepie(result);
-                setComments(result.commentList)
+                setComments(result.commentList);
             })
             .catch((err) => {
                 console.log(err);

@@ -27,7 +27,7 @@ export default function EditRecipie() {
         recipieApi.getOne(id)
             .then(result => {
                 if (result.message) {
-                    navigate('/404')
+                    return navigate('/404');
                 }
                 setRecipie(result);
             })
