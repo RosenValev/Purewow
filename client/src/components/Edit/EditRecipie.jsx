@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { validateRecipieData } from '../../utils/validationForm.js';
 
 import styles from './EditRecipie.module.css'
 import * as recipieApi from '../../services/recipieApi.js'
+import AuthContext from '../../contexts/authContext.jsx';
 
 let formInitialState = {
     title: "",
@@ -20,6 +21,7 @@ let formInitialState = {
 export default function EditRecipie() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { userId } = useContext(AuthContext);
     const [recipie, setRecipie] = useState(formInitialState);
     const [errors, setErrors] = useState({});
 
@@ -33,6 +35,12 @@ export default function EditRecipie() {
             })
             .catch((err) => console.log(err));
     }, [id])
+
+    const isAuthor = userId === recipie.owner?._id;
+
+    if (!isAuthor) {
+        return navigate('/');
+    }
 
     const onChangeHandler = (e) => {
         setRecipie(state => ({ ...state, [e.target.name]: e.target.value }));
