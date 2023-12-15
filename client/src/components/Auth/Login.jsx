@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm.js'
 import { validateLoginData } from '../../utils/validationForm.js'
@@ -18,9 +18,11 @@ export default function Login() {
     const { updateAuth, isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    if (isAuthenticated) {
-        return navigate('/');
-    }
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, []);
 
     const resetFormHandler = () => {
         setFormValues(initialFormValues);
