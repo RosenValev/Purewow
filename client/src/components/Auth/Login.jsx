@@ -15,8 +15,12 @@ let initialFormValues = {
 export default function Login() {
     const { formValues, setFormValues, onChangeHandler } = useForm(initialFormValues)
     const [errors, setErrors] = useState({});
-    const { updateAuth } = useContext(AuthContext);
+    const { updateAuth, isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    if (isAuthenticated) {
+        return navigate('/');
+    }
 
     const resetFormHandler = () => {
         setFormValues(initialFormValues);
