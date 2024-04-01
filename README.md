@@ -7,7 +7,7 @@ This is a simple project for React course at SoftUni - October 2023
 
 Clone the repository
 ```
-https://github.com/RosenValev/react-practice.git
+https://github.com/RosenValev/Purewow.git
 ```
 Navigate to server directory, install the dependencies and start the server
 ```
